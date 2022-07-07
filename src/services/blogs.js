@@ -9,15 +9,15 @@ const setToken = (newToken) => {
 
 const getAll = () => {
   const request = axios.get(baseUrl)
-  return request.then(response => response.data)
+  return request.then((response) => response.data)
 }
 
 const post = async (blog) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json"
-    }
+      "Content-Type": "application/json",
+    },
   }
 
   const response = await axios.post(baseUrl, blog, config)

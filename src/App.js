@@ -17,13 +17,14 @@ const App = () => {
   const togglableCreateNoteFormRef = useRef()
 
   useEffect(() => {
-    const storedUser = JSON.parse(window.localStorage.getItem(LoggedInUserLocalStorageKey))
+    const storedUser = JSON.parse(
+      window.localStorage.getItem(LoggedInUserLocalStorageKey)
+    )
     setUser(storedUser === "null" ? null : storedUser)
     if (storedUser) BlogService.setToken(storedUser.token)
 
     fetchBlogs()
   }, [])
-
 
   const createBlog = async (blog) => {
     togglableCreateNoteFormRef.current.toggleVisibility()
@@ -33,9 +34,7 @@ const App = () => {
   }
 
   const fetchBlogs = () => {
-    BlogService.getAll().then(blogs =>
-      setBlogs(blogs)
-    )
+    BlogService.getAll().then((blogs) => setBlogs(blogs))
   }
 
   const handleLogin = async (event) => {
@@ -45,7 +44,10 @@ const App = () => {
       const response = await axios.post("/api/login", { username, password })
       setUser(response.data)
       BlogService.setToken(response.data.token)
-      window.localStorage.setItem(LoggedInUserLocalStorageKey, JSON.stringify(response.data))
+      window.localStorage.setItem(
+        LoggedInUserLocalStorageKey,
+        JSON.stringify(response.data)
+      )
     } catch (e) {
       notify("unauthorized", false)
     } finally {
@@ -75,12 +77,22 @@ const App = () => {
         <h2>login</h2>
         <form onSubmit={handleLogin}>
           <div>
-            Username: <input type="input" value={username} onChange={({ target }) => setUsername(target.value)} />
+            Username:{" "}
+            <input
+              type="input"
+              value={username}
+              onChange={({ target }) => setUsername(target.value)}
+            />
           </div>
           <div>
-            Password: <input type="password" value={password} onChange={({ target }) => setPassword(target.value)} />
+            Password:{" "}
+            <input
+              type="password"
+              value={password}
+              onChange={({ target }) => setPassword(target.value)}
+            />
           </div>
-          <button type='submit' >login</button>
+          <button type="submit">login</button>
         </form>
       </div>
     )
@@ -88,7 +100,8 @@ const App = () => {
     return (
       <div>
         <Notification message={notifyMessage} success={notifySuccess} />
-        {user.username} is logged in <button onClick={handleLogout}>logout</button>
+        {user.username} is logged in{" "}
+        <button onClick={handleLogout}>logout</button>
         <Togglable buttonLabel={"new blog"} ref={togglableCreateNoteFormRef}>
           <BlogForm callback={createBlog} />
         </Togglable>

@@ -1,36 +1,37 @@
 module.exports = {
-  "env": {
-    "browser": true,
-    "es2022": true,
+  env: {
+    browser: true,
+    es2022: true,
     "jest/globals": true,
-    "node": true
+    node: true,
   },
-  "extends": [
+  extends: [
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
-    "prettier"
+    "prettier",
   ],
-  "plugins": [
-    "react", "jest"
-  ],
-  "rules": {
-    "react/display-name": ["off", {
-      "ignoreTranspilerName": true
-    }],
-    "eqeqeq": "error",
-    "react/prop-types": "off"
+  plugins: ["react", "jest"],
+  rules: {
+    "react/display-name": [
+      "off",
+      {
+        ignoreTranspilerName: true,
+      },
+    ],
+    eqeqeq: "error",
+    "react/prop-types": "off",
   },
-  "parser": "@babel/eslint-parser",
-  "parserOptions": {
-    "requireConfigFile": false,
-    "babelOptions": {
-      "presets": ["@babel/preset-react"]
-    }
+  parser: "@babel/eslint-parser",
+  parserOptions: {
+    requireConfigFile: false,
+    babelOptions: {
+      presets: ["@babel/preset-react"],
+    },
   },
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
-  }
+  settings: {
+    react: {
+      version: "detect",
+    },
+  },
 }

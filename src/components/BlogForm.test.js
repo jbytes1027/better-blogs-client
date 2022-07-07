@@ -24,6 +24,6 @@ test("<BlogForm /> updates parent state and calls onSubmit", async () => {
     title: "test title",
     author: "test author",
     url: "test url",
-    likes: 0
+    likes: 0,
   })
 })

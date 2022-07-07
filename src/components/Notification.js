@@ -20,7 +20,7 @@ const Notification = ({ message, success }) => {
   const style = success ? successStyle : failStyle
 
   return (
-    <div className='notification' style={style}>
+    <div className="notification" style={style}>
       {message}
     </div>
   )

@@ -8,19 +8,19 @@ test("renders content", () => {
     author: "test author",
     likes: 2,
     user: {
-      username: "testUsername"
-    }
+      username: "testUsername",
+    },
   }
 
   const user = {
-    username: "testUsername"
+    username: "testUsername",
   }
 
-  const { container } = render(<Blog blog={blog} handleUpdateBlogs={() => { }} user={user} />)
-  const div = container.querySelector(".blog")
-  expect(div).toHaveTextContent(
-    "test title"
+  const { container } = render(
+    <Blog blog={blog} handleUpdateBlogs={() => {}} user={user} />
   )
+  const div = container.querySelector(".blog")
+  expect(div).toHaveTextContent("test title")
 })
 
 test()

@@ -14,8 +14,10 @@ const Blog = ({ blog, handleUpdateBlogs, user }) => {
   const isUserCreator = user.username === blog.user.username
 
   return (
-    <div className='blog'>
-      {blog.title} {blog.author} {blog.likes} <button onClick={likeBlog} >like</button>{isUserCreator && <button onClick={removeBlog}>remove</button>}
+    <div className="blog">
+      {blog.title} {blog.author} {blog.likes}{" "}
+      <button onClick={likeBlog}>like</button>
+      {isUserCreator && <button onClick={removeBlog}>remove</button>}
     </div>
   )
 }
