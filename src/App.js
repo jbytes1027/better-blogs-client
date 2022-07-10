@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react"
 import BlogsList from "./components/BlogsList"
 import BlogForm from "./components/BlogForm"
 import BlogService from "./services/blogs"
-import Notification from "./components/Notification"
+import { notify, Type as notifyType, default as Notification } from "./components/Notification"
 import Togglable from "./components/Togglable"
 const axios = require("axios")
 
@@ -11,8 +11,6 @@ const App = () => {
   const [user, setUser] = useState(null)
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-  const [notifyMessage, setNotifyMessage] = useState(null)
-  const [notifySuccess, setNotifySuccess] = useState(true)
   const LoggedInUserLocalStorageKey = "BlogLoggedInUser"
   const togglableCreateNoteFormRef = useRef()
 
@@ -49,7 +47,7 @@ const App = () => {
         JSON.stringify(response.data)
       )
     } catch (e) {
-      notify("unauthorized", false)
+      notify("unauthorized", notifyType.Error)
     } finally {
       setUsername("")
       setPassword("")
@@ -62,18 +60,10 @@ const App = () => {
     window.localStorage.removeItem(LoggedInUserLocalStorageKey)
   }
 
-  const notify = (message, success) => {
-    setNotifySuccess(success)
-    setNotifyMessage(message)
-    setTimeout(() => {
-      setNotifyMessage(null)
-    }, 5000)
-  }
-
   if (!user) {
     return (
       <div>
-        <Notification message={notifyMessage} success={notifySuccess} />
+        <Notification />
         <h2>login</h2>
         <form onSubmit={handleLogin}>
           <div>
@@ -99,7 +89,7 @@ const App = () => {
   } else {
     return (
       <div>
-        <Notification message={notifyMessage} success={notifySuccess} />
+        <Notification />
         {user.username} is logged in{" "}
         <button onClick={handleLogout}>logout</button>
         <Togglable buttonLabel={"new blog"} ref={togglableCreateNoteFormRef}>
