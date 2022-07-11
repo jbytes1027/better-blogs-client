@@ -4,10 +4,13 @@ import BlogForm from "./components/BlogForm"
 import BlogService from "./services/blogs"
 import { notify, Type as notifyType, default as Notification } from "./components/Notification"
 import Togglable from "./components/Togglable"
+import { useDispatch, useSelector } from "react-redux"
+import { setBlogs } from "./state/blogsReducer"
 const axios = require("axios")
 
 const App = () => {
-  const [blogs, setBlogs] = useState([])
+  const blogs = useSelector((state) => state.blogs)
+  const dispatch = useDispatch()
   const [user, setUser] = useState(null)
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
@@ -31,8 +34,9 @@ const App = () => {
     fetchBlogs()
   }
 
-  const fetchBlogs = () => {
-    BlogService.getAll().then((blogs) => setBlogs(blogs))
+  const fetchBlogs = async () => {
+    const blogs = await BlogService.getAll()
+    dispatch(setBlogs(blogs))
   }
 
   const handleLogin = async (event) => {

@@ -13,7 +13,7 @@ const notify = (message, type) => {
 
 const Notification = () => {
   const dispatch = useDispatch()
-  const notifications = useSelector((state) => state)
+  const notifications = useSelector((state) => state.notifications)
 
   useEffect(() => {
     if (notifications.length > 0) {

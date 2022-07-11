@@ -5,6 +5,7 @@ const BlogsList = ({ blogs, handleUpdateBlogs, user }) => {
     <>
       <h2>blogs</h2>
       {blogs
+        .slice()
         .sort((a, b) => b.likes - a.likes)
         .map((blog) => (
           <Blog
