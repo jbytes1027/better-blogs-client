@@ -33,16 +33,16 @@ const Notification = () => {
 
   const styles = {
     error: {
-      color: "red",
       ...baseStyle,
+      color: "red",
     },
     success: {
-      color: "green",
       ...baseStyle,
+      color: "green",
     },
     info: {
-      color: "blue",
       ...baseStyle,
+      color: "blue",
     },
   }
 
