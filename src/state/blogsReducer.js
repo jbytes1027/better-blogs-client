@@ -1,10 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit"
+import BlogService from "../services/blogs"
 
 // title: String,
 // author: String,
 // url: String,
 // likes: Number,
 // user:
+
+
+const fetchBlogs = () => async (dispatch) => {
+  const blogs = await BlogService.getAll()
+  dispatch(setBlogs(blogs))
+}
 
 const blogSlice = createSlice({
   name: "blog",
@@ -23,5 +30,6 @@ const blogSlice = createSlice({
   },
 })
 
+export { fetchBlogs }
 export const { addBlog, setBlogs } = blogSlice.actions
 export default blogSlice.reducer

@@ -6,8 +6,6 @@ export const Type = {
   Error: "error",
 }
 
-// create a slice (explain data layout, create reducers)
-
 const notificationSlice = createSlice({
   name: "notification",
   initialState: [],

@@ -1,14 +1,15 @@
 import BlogService from "../services/blogs"
+import { fetchBlogs } from "../state/blogsReducer"
 
-const Blog = ({ blog, handleUpdateBlogs, user }) => {
+const Blog = ({ blog, user }) => {
   const likeBlog = async () => {
     await BlogService.like(blog)
-    handleUpdateBlogs()
+    fetchBlogs()
   }
 
   const removeBlog = async () => {
     await BlogService.remove(blog)
-    handleUpdateBlogs()
+    fetchBlogs()
   }
 
   const isUserCreator = user.username === blog.user.username

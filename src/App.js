@@ -5,7 +5,7 @@ import BlogService from "./services/blogs"
 import { notify, Type as notifyType, default as Notification } from "./components/Notification"
 import Togglable from "./components/Togglable"
 import { useDispatch, useSelector } from "react-redux"
-import { setBlogs } from "./state/blogsReducer"
+import { fetchBlogs } from "./state/blogsReducer"
 const axios = require("axios")
 
 const App = () => {
@@ -24,7 +24,7 @@ const App = () => {
     setUser(storedUser === "null" ? null : storedUser)
     if (storedUser) BlogService.setToken(storedUser.token)
 
-    fetchBlogs()
+    dispatch(fetchBlogs())
   }, [])
 
   const createBlog = async (blog) => {
@@ -34,10 +34,6 @@ const App = () => {
     fetchBlogs()
   }
 
-  const fetchBlogs = async () => {
-    const blogs = await BlogService.getAll()
-    dispatch(setBlogs(blogs))
-  }
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -99,7 +95,7 @@ const App = () => {
         <Togglable buttonLabel={"new blog"} ref={togglableCreateNoteFormRef}>
           <BlogForm callback={createBlog} />
         </Togglable>
-        <BlogsList blogs={blogs} handleUpdateBlogs={fetchBlogs} user={user} />
+        <BlogsList blogs={blogs} user={user} />
       </div>
     )
   }

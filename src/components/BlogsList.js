@@ -1,6 +1,6 @@
 import Blog from "./Blog"
 
-const BlogsList = ({ blogs, handleUpdateBlogs, user }) => {
+const BlogsList = ({ blogs, user }) => {
   return (
     <>
       <h2>blogs</h2>
@@ -11,7 +11,6 @@ const BlogsList = ({ blogs, handleUpdateBlogs, user }) => {
           <Blog
             key={blog.id}
             blog={blog}
-            handleUpdateBlogs={handleUpdateBlogs}
             user={user}
           />
         ))}
