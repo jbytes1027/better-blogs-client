@@ -1,6 +1,9 @@
 import { useState } from "react"
+import { useDispatch } from "react-redux"
 
 const BlogForm = ({ callback }) => {
+  // TODO: use form hook
+  const dispatch = useDispatch()
   const [title, setTitle] = useState("")
   const [author, setAuthor] = useState("")
   const [url, setUrl] = useState("")
@@ -14,7 +17,8 @@ const BlogForm = ({ callback }) => {
     setAuthor("")
     setUrl("")
 
-    callback(newBlog)
+    callback()
+    dispatch(createBlog(newBlog))
   }
 
   return (

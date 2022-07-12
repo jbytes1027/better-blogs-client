@@ -7,9 +7,9 @@ const setToken = (newToken) => {
   token = newToken
 }
 
-const getAll = () => {
-  const request = axios.get(baseUrl)
-  return request.then((response) => response.data)
+const getAll = async () => {
+  const res = await axios.get(baseUrl)
+  return res.data
 }
 
 const post = async (blog) => {
@@ -25,8 +25,12 @@ const post = async (blog) => {
 }
 
 const like = async (blog) => {
-  blog.likes += 1
-  await axios.put(baseUrl + "/" + blog.id, blog)
+  const likedBlog = {
+    ...blog,
+    likes: blog.likes + 1
+  }
+  const res = await axios.put(`${baseUrl}/${blog.id}`, likedBlog)
+  return res.data
 }
 
 const remove = async (blog) => {

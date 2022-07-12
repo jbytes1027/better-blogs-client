@@ -27,11 +27,8 @@ const App = () => {
     dispatch(fetchBlogs())
   }, [])
 
-  const createBlog = async (blog) => {
+  const onSubmitCallback = async () => {
     togglableCreateNoteFormRef.current.toggleVisibility()
-
-    await BlogService.post(blog)
-    fetchBlogs()
   }
 
 
@@ -93,7 +90,7 @@ const App = () => {
         {user.username} is logged in{" "}
         <button onClick={handleLogout}>logout</button>
         <Togglable buttonLabel={"new blog"} ref={togglableCreateNoteFormRef}>
-          <BlogForm callback={createBlog} />
+          <BlogForm callback={onSubmitCallback} />
         </Togglable>
         <BlogsList blogs={blogs} user={user} />
       </div>
