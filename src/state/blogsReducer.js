@@ -31,12 +31,16 @@ const blogSlice = createSlice({
   name: "blog",
   initialState: [],
   reducers: {
-    setBlogs(state, action) { return action.payload },
+    setBlogs(state, action) {
+      return action.payload
+    },
     addBlog(state, action) {
       state.push(action.payload)
     },
     updateBlog(state, action) {
-      const toUpdateBlogIndex = state.findIndex((b) => b.id === action.payload.id)
+      const toUpdateBlogIndex = state.findIndex(
+        (b) => b.id === action.payload.id
+      )
       state.splice(toUpdateBlogIndex, 1, action.payload)
     },
     removeBlog(state, action) {

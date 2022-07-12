@@ -11,7 +11,7 @@ module.exports = {
     "plugin:react/jsx-runtime",
     "prettier",
   ],
-  plugins: ["react", "jest"],
+  plugins: ["react", "react-hooks", "jest"],
   rules: {
     "react/display-name": [
       "off",

@@ -1,9 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { v4 as uuid } from "uuid"
 
 export const Type = {
   Info: "info",
   Success: "success",
   Error: "error",
+}
+
+export const notify = (message, type) => async (dispatch) => {
+  dispatch(addNotification(message, type, uuid()))
 }
 
 const notificationSlice = createSlice({

@@ -1,15 +1,6 @@
-import { v4 as uuid } from "uuid"
-import {
-  addNotification,
-  removeNotification,
-} from "../state/notificationReducer"
-import store from "../state/store"
+import { removeNotification } from "../state/notificationReducer"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
-
-const notify = (message, type) => {
-  store.dispatch(addNotification(message, type, uuid()))
-}
 
 const Notification = () => {
   const dispatch = useDispatch()
@@ -57,6 +48,4 @@ const Notification = () => {
   }
 }
 
-export { Type } from "../state/notificationReducer"
-export { notify }
 export default Notification
