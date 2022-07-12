@@ -6,12 +6,12 @@ import { notify, Type as notifyType, default as Notification } from "./component
 import Togglable from "./components/Togglable"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchBlogs } from "./state/blogsReducer"
+import { setUser } from "./state/userReducer"
 const axios = require("axios")
 
 const App = () => {
-  const blogs = useSelector((state) => state.blogs)
   const dispatch = useDispatch()
-  const [user, setUser] = useState(null)
+  const user = useSelector((state) => state.user)
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const LoggedInUserLocalStorageKey = "BlogLoggedInUser"
@@ -21,7 +21,8 @@ const App = () => {
     const storedUser = JSON.parse(
       window.localStorage.getItem(LoggedInUserLocalStorageKey)
     )
-    setUser(storedUser === "null" ? null : storedUser)
+    dispatch(setUser(storedUser === "null" ? null : storedUser))
+    console.log(storedUser)
     if (storedUser) BlogService.setToken(storedUser.token)
 
     dispatch(fetchBlogs())
@@ -37,7 +38,7 @@ const App = () => {
 
     try {
       const response = await axios.post("/api/login", { username, password })
-      setUser(response.data)
+      dispatch(setUser(response.data))
       BlogService.setToken(response.data.token)
       window.localStorage.setItem(
         LoggedInUserLocalStorageKey,
@@ -52,7 +53,7 @@ const App = () => {
   }
 
   const handleLogout = async () => {
-    setUser(null)
+    dispatch(setUser(null))
     BlogService.setToken(null)
     window.localStorage.removeItem(LoggedInUserLocalStorageKey)
   }
@@ -92,7 +93,7 @@ const App = () => {
         <Togglable buttonLabel={"new blog"} ref={togglableCreateNoteFormRef}>
           <BlogForm callback={onSubmitCallback} />
         </Togglable>
-        <BlogsList blogs={blogs} user={user} />
+        <BlogsList />
       </div>
     )
   }

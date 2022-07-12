@@ -1,8 +1,9 @@
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { likeBlog, removeBlog } from "../state/blogsReducer"
 
-const Blog = ({ blog, user }) => {
+const Blog = ({ blog }) => {
   const dispatch = useDispatch()
+  const user = useSelector((state) => state.user)
   const isUserCreator = user.username === blog.user.username
 
   return (

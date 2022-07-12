@@ -1,6 +1,9 @@
+import { useSelector } from "react-redux"
 import Blog from "./Blog"
 
-const BlogsList = ({ blogs, user }) => {
+const BlogsList = () => {
+  const blogs = useSelector((state) => state.blogs)
+
   return (
     <>
       <h2>blogs</h2>
@@ -11,7 +14,6 @@ const BlogsList = ({ blogs, user }) => {
           <Blog
             key={blog.id}
             blog={blog}
-            user={user}
           />
         ))}
     </>
