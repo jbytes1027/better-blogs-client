@@ -11,6 +11,7 @@ import { Route, Routes } from "react-router"
 import LoginView from "./components/users/LoginView"
 import { LoggedInUserLocalStorageKey } from "./config"
 import UserList from "./components/users/UserList"
+import UserView from "./components/users/UserView"
 
 const App = () => {
   const dispatch = useDispatch()
@@ -22,7 +23,6 @@ const App = () => {
       window.localStorage.getItem(LoggedInUserLocalStorageKey)
     )
     dispatch(setUser(storedUser === "null" ? null : storedUser))
-    console.log(storedUser)
     if (storedUser) BlogService.setToken(storedUser.token)
 
     dispatch(fetchBlogs())
@@ -56,8 +56,9 @@ const App = () => {
         <Route path="/" element={<CreateView />} />
         <Route path="/login" element={<LoginView />} />
         <Route path="/users" element={<UserList />} />
+        <Route path="/users/:userId" element={<UserView />} />
       </Routes>
-    </div>
+    </div >
   )
 }
 

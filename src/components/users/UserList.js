@@ -1,20 +1,21 @@
 // display all users and their blogs created
 
-import axios from "axios"
+import UserService from "../../services/users"
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 
 const User = ({ user }) => (
   <div>
-    {user.username}: has {user.blogs.length} posts
+    <Link to={user.id}>{user.username}</Link>: has {user.blogs.length} posts
   </div>
 )
 
 const UserList = () => {
   const [users, setUsers] = useState([])
 
-  useEffect(async () => {
-    const res = await axios.get("/api/users")
-    setUsers(res.data)
+  useEffect(() => {
+    UserService.getAll()
+      .then(users => setUsers(users))
   }, [])
 
   return (
