@@ -9,6 +9,11 @@ const setToken = (newToken) => {
   token = newToken
 }
 
+const get = async (blogId) => {
+  const res = await axios.put(`${baseUrl}/${blogId}`)
+  return res.data
+}
+
 const getAll = async () => {
   const res = await axios.get(baseUrl)
   return res.data
@@ -39,6 +44,6 @@ const remove = async (blog) => {
   await axios.delete(`${baseUrl}/${blog.id}`)
 }
 
-const exports = { like, getAll, post, setToken, remove }
+const exports = { like, getAll, get, post, setToken, remove }
 
 export default exports

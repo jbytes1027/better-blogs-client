@@ -7,16 +7,18 @@ import Togglable from "./components/Togglable"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchBlogs } from "./state/blogsReducer"
 import { setUser } from "./state/userReducer"
-import { Route, Routes } from "react-router"
+import { Route, Routes, Navigate, useLocation } from "react-router"
 import LoginView from "./components/users/LoginView"
 import { LoggedInUserLocalStorageKey } from "./config"
 import UserList from "./components/users/UserList"
 import UserView from "./components/users/UserView"
+import BlogView from "./components/blogs/BlogView"
 
 const App = () => {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.user)
   const togglableCreateNoteFormRef = useRef()
+  const location = useLocation()
 
   useEffect(() => {
     const storedUser = JSON.parse(
@@ -49,6 +51,8 @@ const App = () => {
     </div>
   )
 
+  if (!user && location.pathname !== '/login') return (<Navigate to="/login" />)
+
   return (
     <div>
       <Notification />
@@ -57,6 +61,7 @@ const App = () => {
         <Route path="/login" element={<LoginView />} />
         <Route path="/users" element={<UserList />} />
         <Route path="/users/:userId" element={<UserView />} />
+        <Route path="/blogs/:blogId" element={<BlogView />} />
       </Routes>
     </div >
   )
