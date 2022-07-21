@@ -63,7 +63,7 @@ const App = () => {
         <Route path="/users/:userId" element={<UserView />} />
         <Route path="/blogs/:blogId" element={<BlogView />} />
       </Routes>
-    </div >
+    </div>
   )
 }
 

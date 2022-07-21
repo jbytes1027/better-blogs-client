@@ -1,19 +1,20 @@
-import { useDispatch, useSelector } from "react-redux"
-import { likeBlog, removeBlog } from "../../state/blogsReducer"
+import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 
-const Blog = ({ blog }) => {
-  const dispatch = useDispatch()
-  const user = useSelector((state) => state.user)
-  const isUserCreator = user.username === blog.user.username
+const Post = ({ blog }) => {
+  const navigate = useNavigate()
+
+  const handleClick = () => {
+    navigate(`/blogs/${blog.id}`)
+  }
 
   return (
-    <div className="blog">
-      {blog.title} {blog.author} {blog.likes}{" "}
-      <button onClick={() => dispatch(likeBlog(blog))}>like</button>
-      {isUserCreator && (
-        <button onClick={() => dispatch(removeBlog(blog))}>remove</button>
-      )}
-    </div>
+    <div className="post" onClick={handleClick}>
+      <div className={"post-title"}>
+        {blog.title}
+      </div>
+      by {blog.author}
+    </div >
   )
 }
 
@@ -27,7 +28,7 @@ const BlogsList = () => {
         .slice()
         .sort((a, b) => b.likes - a.likes)
         .map((blog) => (
-          <Blog key={blog.id} blog={blog} />
+          <Post key={blog.id} blog={blog} />
         ))}
     </>
   )
