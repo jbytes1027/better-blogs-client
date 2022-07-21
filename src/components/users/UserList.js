@@ -1,4 +1,4 @@
-// display all users and their blogs created
+// display all users and their posts created
 
 import UserService from "../../services/users"
 import { useEffect, useState } from "react"
@@ -6,7 +6,7 @@ import { Link } from "react-router-dom"
 
 const User = ({ user }) => (
   <div>
-    <Link to={user.id}>{user.username}</Link>: has {user.blogs.length} posts
+    <Link to={user.id}>{user.username}</Link>: has {user.posts.length} posts
   </div>
 )
 

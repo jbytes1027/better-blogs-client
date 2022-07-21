@@ -1,18 +1,18 @@
 import { useEffect, useRef } from "react"
-import BlogsList from "./components/blogs/BlogsList"
-import BlogForm from "./components/blogs/BlogForm"
-import BlogService from "./services/blogs"
+import PostList from "./components/posts/PostList"
+import CreatePostForm from "./components/posts/CreatePostForm"
+import PostService from "./services/posts"
 import { default as Notification } from "./components/Notification"
 import Togglable from "./components/Togglable"
 import { useDispatch, useSelector } from "react-redux"
-import { fetchBlogs } from "./state/blogsReducer"
+import { fetchPosts } from "./state/postsReducer"
 import { setUser } from "./state/userReducer"
 import { Route, Routes, Navigate, useLocation } from "react-router"
 import LoginView from "./components/users/LoginView"
 import { LoggedInUserLocalStorageKey } from "./config"
 import UserList from "./components/users/UserList"
 import UserView from "./components/users/UserView"
-import BlogView from "./components/blogs/BlogView"
+import PostView from "./components/posts/PostView"
 
 const App = () => {
   const dispatch = useDispatch()
@@ -25,9 +25,9 @@ const App = () => {
       window.localStorage.getItem(LoggedInUserLocalStorageKey)
     )
     dispatch(setUser(storedUser === "null" ? null : storedUser))
-    if (storedUser) BlogService.setToken(storedUser.token)
+    if (storedUser) PostService.setToken(storedUser.token)
 
-    dispatch(fetchBlogs())
+    dispatch(fetchPosts())
   }, [])
 
   const onSubmitCallback = async () => {
@@ -36,7 +36,7 @@ const App = () => {
 
   const handleLogout = async () => {
     dispatch(setUser(null))
-    BlogService.setToken(null)
+    PostService.setToken(null)
     window.localStorage.removeItem(LoggedInUserLocalStorageKey)
   }
 
@@ -44,10 +44,10 @@ const App = () => {
     <div>
       {user.username} is logged in{" "}
       <button onClick={handleLogout}>logout</button>
-      <Togglable buttonLabel={"new blog"} ref={togglableCreateNoteFormRef}>
-        <BlogForm callback={onSubmitCallback} />
+      <Togglable buttonLabel={"new post"} ref={togglableCreateNoteFormRef}>
+        <CreatePostForm callback={onSubmitCallback} />
       </Togglable>
-      <BlogsList />
+      <PostList />
     </div>
   )
 
@@ -61,7 +61,7 @@ const App = () => {
         <Route path="/login" element={<LoginView />} />
         <Route path="/users" element={<UserList />} />
         <Route path="/users/:userId" element={<UserView />} />
-        <Route path="/blogs/:blogId" element={<BlogView />} />
+        <Route path="/posts/:postId" element={<PostView />} />
       </Routes>
     </div>
   )

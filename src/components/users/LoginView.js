@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux"
 import { setUser } from "../../state/userReducer"
 import LoginForm from "./LoginForm"
 import { notify, Type as notifyType } from "../../state/notificationReducer"
-import BlogService from "../../services/blogs"
+import PostService from "../../services/posts"
 import SessionService from "../../services/session"
 import { LoggedInUserLocalStorageKey } from "../../config"
 
@@ -13,7 +13,7 @@ const LoginView = () => {
     try {
       const user = await SessionService.login(username, password)
       dispatch(setUser(user))
-      BlogService.setToken(user.token)
+      PostService.setToken(user.token)
       window.localStorage.setItem(
         LoggedInUserLocalStorageKey,
         JSON.stringify(user)

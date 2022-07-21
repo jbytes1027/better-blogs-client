@@ -1,9 +1,9 @@
 import "@testing-library/jest-dom/extend-expect"
 import { render } from "@testing-library/react"
-import Blog from "./Blog"
+import Post from "./Post"
 
 test("renders content", () => {
-  const blog = {
+  const post = {
     title: "test title",
     author: "test author",
     likes: 2,
@@ -17,9 +17,9 @@ test("renders content", () => {
   }
 
   const { container } = render(
-    <Blog blog={blog} handleUpdateBlogs={() => {}} user={user} />
+    <Post post={post} handleUpdatePosts={() => { }} user={user} />
   )
-  const div = container.querySelector(".blog")
+  const div = container.querySelector(".post")
   expect(div).toHaveTextContent("test title")
 })
 

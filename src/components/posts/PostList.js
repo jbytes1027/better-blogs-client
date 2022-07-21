@@ -1,37 +1,37 @@
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
-const Post = ({ blog }) => {
+const Post = ({ post }) => {
   const navigate = useNavigate()
 
   const handleClick = () => {
-    navigate(`/blogs/${blog.id}`)
+    navigate(`/posts/${post.id}`)
   }
 
   return (
     <div className="post" onClick={handleClick}>
       <div className={"post-title"}>
-        {blog.title}
+        {post.title}
       </div>
-      by {blog.author}
-    </div >
+      by {post.author}
+    </div>
   )
 }
 
-const BlogsList = () => {
-  const blogs = useSelector((state) => state.blogs)
+const PostList = () => {
+  const posts = useSelector((state) => state.posts)
 
   return (
     <>
-      <h2>blogs</h2>
-      {blogs
+      <h2>posts</h2>
+      {posts
         .slice()
         .sort((a, b) => b.likes - a.likes)
-        .map((blog) => (
-          <Post key={blog.id} blog={blog} />
+        .map((post) => (
+          <Post key={post.id} post={post} />
         ))}
     </>
   )
 }
 
-export default BlogsList
+export default PostList

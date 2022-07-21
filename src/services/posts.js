@@ -9,8 +9,8 @@ const setToken = (newToken) => {
   token = newToken
 }
 
-const get = async (blogId) => {
-  const res = await axios.put(`${baseUrl}/${blogId}`)
+const get = async (postId) => {
+  const res = await axios.put(`${baseUrl}/${postId}`)
   return res.data
 }
 
@@ -19,7 +19,7 @@ const getAll = async () => {
   return res.data
 }
 
-const post = async (blog) => {
+const post = async (post) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -27,21 +27,21 @@ const post = async (blog) => {
     },
   }
 
-  const response = await axios.post(baseUrl, blog, config)
+  const response = await axios.post(baseUrl, post, config)
   return response.data
 }
 
-const like = async (blog) => {
-  const likedBlog = {
-    ...blog,
-    likes: blog.likes + 1,
+const like = async (post) => {
+  const likedPost = {
+    ...post,
+    likes: post.likes + 1,
   }
-  const res = await axios.put(`${baseUrl}/${blog.id}`, likedBlog)
+  const res = await axios.put(`${baseUrl}/${post.id}`, likedPost)
   return res.data
 }
 
-const remove = async (blog) => {
-  await axios.delete(`${baseUrl}/${blog.id}`)
+const remove = async (post) => {
+  await axios.delete(`${baseUrl}/${post.id}`)
 }
 
 const exports = { like, getAll, get, post, setToken, remove }

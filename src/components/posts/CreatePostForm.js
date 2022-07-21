@@ -1,32 +1,32 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 
-const BlogForm = ({ callback }) => {
+const CreatePostForm = ({ callback }) => {
   // TODO: use form hook
   const dispatch = useDispatch()
   const [title, setTitle] = useState("")
   const [author, setAuthor] = useState("")
   const [url, setUrl] = useState("")
 
-  const createBlog = (event) => {
+  const createPost = (event) => {
     event.preventDefault()
 
-    const newBlog = { title, author, url, likes: 0 }
+    const newPost = { title, author, url, likes: 0 }
 
     setTitle("")
     setAuthor("")
     setUrl("")
 
     callback()
-    dispatch(createBlog(newBlog))
+    dispatch(createPost(newPost))
   }
 
   return (
-    <form onSubmit={createBlog}>
+    <form onSubmit={createPost}>
       <div>
         title:{" "}
         <input
-          id="blog-title-input"
+          id="input-post-title"
           type="input"
           value={title}
           onChange={({ target }) => setTitle(target.value)}
@@ -35,7 +35,7 @@ const BlogForm = ({ callback }) => {
       <div>
         author:{" "}
         <input
-          id="blog-author-input"
+          id="input-post-author"
           type="input"
           value={author}
           onChange={({ target }) => setAuthor(target.value)}
@@ -44,7 +44,7 @@ const BlogForm = ({ callback }) => {
       <div>
         url:{" "}
         <input
-          id="blog-url-input"
+          id="input-post-url"
           type="input"
           value={url}
           onChange={({ target }) => setUrl(target.value)}
@@ -55,4 +55,4 @@ const BlogForm = ({ callback }) => {
   )
 }
 
-export default BlogForm
+export default CreatePostForm

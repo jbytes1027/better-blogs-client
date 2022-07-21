@@ -17,7 +17,7 @@ const UserView = () => {
   return (
     <div>
       <h2>{user.name}</h2>
-      {user.blogs.map((b) => (
+      {user.posts.map((b) => (
         <div key={b.id}>
           {b.title}
         </div>
