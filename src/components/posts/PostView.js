@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import PostService from "../../services/posts"
 
 const PostView = () => {
@@ -15,9 +15,15 @@ const PostView = () => {
   if (!post) return null
 
   return (
-    <div>
-      <h2>{post.title}</h2>
-      {post.url}
+    <div className="post-view">
+      <div className="post-title">{post.title}</div>
+      By: {post.author}
+      <br />
+      Url: <Link to={post.url}>{post.url}</Link>
+      <br />
+      Posted by: <Link to={`/users/${post.user.username}`}>{post.user.username}</Link>
+      <br />
+      Likes: {post.likes}
     </div>
   )
 }
