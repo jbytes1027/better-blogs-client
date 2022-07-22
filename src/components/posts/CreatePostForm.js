@@ -1,39 +1,47 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
+import { addPost } from "../../state/postsReducer"
+import PostService from "../../services/posts"
 
-const CreatePostForm = ({ callback }) => {
+const CreatePostForm = () => {
   // TODO: use form hook
   const dispatch = useDispatch()
   const [title, setTitle] = useState("")
   const [author, setAuthor] = useState("")
   const [url, setUrl] = useState("")
 
-  const createPost = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault()
 
     const newPost = { title, author, url, likes: 0 }
 
+    const createdPost = await PostService.post(newPost)
+    dispatch(addPost(createdPost))
+
     setTitle("")
     setAuthor("")
     setUrl("")
-
-    callback()
-    dispatch(createPost(newPost))
   }
 
   return (
-    <form onSubmit={createPost}>
+    <form onSubmit={onSubmit}>
+      <h1>
+        Create a Post
+      </h1>
       <div>
-        title:{" "}
+        Title:
+        <br />
         <input
           id="input-post-title"
           type="input"
           value={title}
           onChange={({ target }) => setTitle(target.value)}
+          required
         />
       </div>
       <div>
-        author:{" "}
+        Author:
+        <br />
         <input
           id="input-post-author"
           type="input"
@@ -42,7 +50,8 @@ const CreatePostForm = ({ callback }) => {
         />
       </div>
       <div>
-        url:{" "}
+        Url:
+        <br />
         <input
           id="input-post-url"
           type="input"
@@ -51,6 +60,7 @@ const CreatePostForm = ({ callback }) => {
         />
       </div>
       <button type="submit">create</button>
+      <button type="cancel" disabled={true} >cancel</button>
     </form>
   )
 }

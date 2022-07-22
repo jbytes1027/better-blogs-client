@@ -1,7 +1,7 @@
 import axios from "axios"
 import { BACKEND_URL } from "../config"
 
-const baseUrl = `${BACKEND_URL}/api/blogs`
+const baseUrl = `${BACKEND_URL}/api/posts`
 
 let token
 
