@@ -38,7 +38,6 @@ const App = () => {
 
   return (
     <div>
-      <Notification />
       <Routes>
         <Route path="/login" element={<LoginView />} />
         <Route path="/users" element={<UserList />} />
@@ -46,6 +45,7 @@ const App = () => {
         <Route path="/posts/create" element={<CreatePostForm />} />
         <Route path="/posts/:postId" element={<PostView />} />
       </Routes>
+      <Notification />
     </div>
   )
 }
