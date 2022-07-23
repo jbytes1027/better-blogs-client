@@ -1,66 +1,49 @@
-import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { addPost } from "../../state/postsReducer"
 import PostService from "../../services/posts"
+import { useForm } from "react-hook-form"
+import { useState } from "react"
 
 const CreatePostForm = () => {
-  // TODO: use form hook
   const dispatch = useDispatch()
-  const [title, setTitle] = useState("")
-  const [author, setAuthor] = useState("")
-  const [url, setUrl] = useState("")
+  const { register, handleSubmit, formState } = useForm({ shouldFocusError: false, mode: "onChange" })
+  const { isValid } = formState
+  const [isLoading, setIsLoading] = useState(false)
 
-  const onSubmit = async (event) => {
-    event.preventDefault()
+  const onSubmit = async () => {
+    const newPost = {}
 
-    const newPost = { title, author, url, likes: 0 }
-
-    const createdPost = await PostService.post(newPost)
-    dispatch(addPost(createdPost))
-
-    setTitle("")
-    setAuthor("")
-    setUrl("")
+    try {
+      setIsLoading(true)
+      const createdPost = await PostService.post(newPost)
+      dispatch(addPost(createdPost))
+    } catch (error) {
+      setIsLoading(false)
+    }
   }
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <h1>
         Create a Post
       </h1>
       <div>
-        Title:
+        Title
         <br />
-        <input
-          id="input-post-title"
-          type="input"
-          value={title}
-          onChange={({ target }) => setTitle(target.value)}
-          required
-        />
+        <input {...register("input-post-title", { required: true })} />
       </div>
       <div>
-        Author:
+        Author
         <br />
-        <input
-          id="input-post-author"
-          type="input"
-          value={author}
-          onChange={({ target }) => setAuthor(target.value)}
-        />
+        <input {...register("input-post-author", { required: true })} />
       </div>
       <div>
-        Url:
+        Url
         <br />
-        <input
-          id="input-post-url"
-          type="input"
-          value={url}
-          onChange={({ target }) => setUrl(target.value)}
-        />
+        <input {...register("input-post-url", { required: true })} />
       </div>
-      <button type="submit">create</button>
-      <button type="cancel" disabled={true} >cancel</button>
+      <button type="submit" disabled={!isValid || isLoading}>create</button>
+      <button type="cancel" >cancel</button>
     </form>
   )
 }
