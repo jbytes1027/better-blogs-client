@@ -35,6 +35,18 @@ input:focus, .post:hover, button:hover {
     padding: var(--padding);
 }
 
+form input {
+    width: 300px;
+}
+
+form div {
+    margin-bottom: 1em;
+}
+
+form button {
+    margin-right: 1em;
+}
+
 form {
     margin: 1em
 }
