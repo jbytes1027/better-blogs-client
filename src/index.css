@@ -3,6 +3,7 @@
     --fg-color: #8FBEFF;
     --line-size: 2px;
     --padding: 0.5em;
+    --margin: 1em;
 }
 
 * {
@@ -40,15 +41,15 @@ form input {
 }
 
 form div {
-    margin-bottom: 1em;
+    margin-bottom: var(--margin);
 }
 
 form button {
-    margin-right: 1em;
+    margin-right: var(--margin);
 }
 
 form {
-    margin: 1em
+    margin: var(--margin)
 }
 
 form > * {
@@ -85,7 +86,7 @@ form :disabled {
 h1 {
     font-weight: bold;
     font-size: x-large;
-    margin-bottom: 1em;
+    margin-bottom: var(--margin);
 }
 
 h2 {
