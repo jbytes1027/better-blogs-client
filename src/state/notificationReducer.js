@@ -7,7 +7,7 @@ export const Type = {
   Error: "error",
 }
 
-export const notify = (message, type) => async (dispatch) => {
+export const notify = (message, type = Type.Info) => async (dispatch) => {
   dispatch(addNotification(message, type, uuid()))
 }
 

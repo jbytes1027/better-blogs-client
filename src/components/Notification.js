@@ -14,34 +14,11 @@ const Notification = () => {
     }
   }, [notifications])
 
-  const baseStyle = {
-    color: "black",
-    background: "lightgrey",
-    fontSize: "20",
-    borderStyle: "solid",
-    padding: "10",
-  }
-
-  const styles = {
-    error: {
-      ...baseStyle,
-      color: "red",
-    },
-    success: {
-      ...baseStyle,
-      color: "green",
-    },
-    info: {
-      ...baseStyle,
-      color: "blue",
-    },
-  }
-
   if (!notifications[0]) {
     return null
   } else {
     return (
-      <div className="notification" style={styles[notifications[0].type]}>
+      <div id="notification" className={`notification-${notifications[0].type}`} >
         {notifications[0].message}
       </div>
     )
