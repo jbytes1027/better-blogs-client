@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import UserService from "../../services/users"
+import PostList from "../posts/PostList"
 
 const UserView = () => {
   const params = useParams()
@@ -15,14 +16,7 @@ const UserView = () => {
   if (!user) return null
 
   return (
-    <div>
-      <h2>{user.name}</h2>
-      {user.posts.map((b) => (
-        <div key={b.id}>
-          {b.title}
-        </div>
-      ))}
-    </div>
+    <PostList title={`${user.username} Posts`} filter={(i) => i.user.id === user.id} />
   )
 }
 

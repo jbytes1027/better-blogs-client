@@ -37,10 +37,6 @@ const CreatePostForm = () => {
     }
   }
 
-  const onBack = () => {
-    navigate('/')
-  }
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h1>
@@ -62,7 +58,6 @@ const CreatePostForm = () => {
         <input {...register("input-post-url", { required: true })} />
       </div>
       <button type="submit" disabled={!isValid || isLoading}>Create</button>
-      <button onClick={onBack}>Back</button>
     </form>
   )
 }

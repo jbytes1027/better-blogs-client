@@ -2,13 +2,24 @@
 
 import UserService from "../../services/users"
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
-const User = ({ user }) => (
-  <div>
-    <Link to={user.id}>{user.username}</Link>: has {user.posts.length} posts
-  </div>
-)
+const User = ({ user }) => {
+  const navigate = useNavigate()
+
+  const handleClick = () => {
+    navigate(`/users/${user.id}`)
+  }
+
+  return (
+    <div className="list-item" onClick={handleClick}>
+      <div className={"list-item-title"} onClick={handleClick}>
+        {user.username}
+      </div>
+      {user.posts.length} posts
+    </div>
+  )
+}
 
 const UserList = () => {
   const [users, setUsers] = useState([])
@@ -20,10 +31,12 @@ const UserList = () => {
 
   return (
     <div>
-      <h2>Users</h2>
-      {users.map((u) => (
-        <User key={u.id} user={u} />
-      ))}
+      <h1>Users</h1>
+      <div className="list">
+        {users.map((u) => (
+          <User key={u.id} user={u} />
+        ))}
+      </div>
     </div>
   )
 }

@@ -30,7 +30,7 @@ const PostView = () => {
         <br />
         <b>Url:</b> <a target="_blank" rel="noopener noreferrer" href={post.url}>{post.url}</a>
         <br />
-        <b>Posted by:</b> <Link to={`/users/${post.user.username}`}>{post.user.username}</Link>
+        <b>Posted by:</b> <Link to={`/users/${post.user.id}`}>{post.user.username}</Link>
         <b> on</b> {new Date(post.time).toLocaleDateString()}
         <br />
         <b>Likes:</b> {post.likes}
@@ -45,7 +45,7 @@ const PostView = () => {
 
 const CommentList = ({ comments }) => (
   <div className="post-comments">
-    {comments.map((c, i) => (
+    {comments.slice().reverse().map((c, i) => (
       <div className="comment" key={i}>
         {c}
       </div>

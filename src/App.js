@@ -12,6 +12,7 @@ import UserList from "./components/users/UserList"
 import UserView from "./components/users/UserView"
 import PostView from "./components/posts/PostView"
 import PostList from "./components/posts/PostList"
+import NavBar from "./components/NavBar"
 
 const App = () => {
   const dispatch = useDispatch()
@@ -38,18 +39,21 @@ const App = () => {
   if (!user && location.pathname !== '/login') return (<Navigate to="/login" />)
 
   return (
-    <div>
-      <Routes>
-        <Route path="/login" element={<LoginView />} />
-        <Route path="/users" element={<UserList />} />
-        <Route path="/users/:userId" element={<UserView />} />
-        <Route path="/posts/all" element={<PostList />} />
-        <Route path="/posts/create" element={<CreatePostForm />} />
-        <Route path="/posts/:postId" element={<PostView />} />
-        <Route path="*" element={<h1>404 Page Not Found</h1>} />
-      </Routes>
+    <>
+      <NavBar />
+      <div className="content">
+        <Routes>
+          <Route path="/login" element={<LoginView />} />
+          <Route path="/users/all" element={<UserList />} />
+          <Route path="/users/:userId" element={<UserView />} />
+          <Route path="/posts/all" element={<PostList />} />
+          <Route path="/posts/create" element={<CreatePostForm />} />
+          <Route path="/posts/:postId" element={<PostView />} />
+          <Route path="*" element={<h1>404 Page Not Found</h1>} />
+        </Routes>
+      </div>
       <Notification />
-    </div>
+    </>
   )
 }
 

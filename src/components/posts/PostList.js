@@ -11,8 +11,8 @@ const Post = ({ post }) => {
   const timePosted = new Date(post.time)
 
   return (
-    <div className="post" onClick={handleClick}>
-      <div className={"post-title"}>
+    <div className="list-item" onClick={handleClick}>
+      <div className={"list-item-title"}>
         {post.title}
       </div>
       by {post.author} • posted {timePosted.toLocaleDateString()} • {post.likes} likes
@@ -20,19 +20,25 @@ const Post = ({ post }) => {
   )
 }
 
-const PostList = () => {
+const PostList = ({ filter, title }) => {
   const posts = useSelector((state) => state.posts)
 
+  if (!filter) filter = () => (true)
+  if (!title) title = "Posts"
+
   return (
-    <div className="posts">
-      <h1>Posts</h1>
-      {posts
-        .slice()
-        .sort((a, b) => b.likes - a.likes)
-        .map((post) => (
-          <Post key={post.id} post={post} />
-        ))}
-    </div>
+    <>
+      <h1>{title}</h1>
+      <div className="list">
+        {posts
+          .slice()
+          .filter(filter)
+          .sort((a, b) => b.likes - a.likes)
+          .map((post) => (
+            <Post key={post.id} post={post} />
+          ))}
+      </div>
+    </>
   )
 }
 
