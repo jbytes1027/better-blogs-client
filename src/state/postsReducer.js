@@ -12,7 +12,7 @@ const fetchPosts = () => async (dispatch) => {
   dispatch(setPosts(posts))
 }
 
-const updatePost = (post) => async (dispatch) => {
+const likePost = (post) => async (dispatch) => {
   const updatedPost = await PostService.like(post)
   dispatch(postSlice.actions.updatePost(updatedPost))
 }
@@ -45,6 +45,6 @@ const postSlice = createSlice({
   },
 })
 
-export { fetchPosts, updatePost, removePost }
+export { fetchPosts, likePost as updatePost, removePost }
 export const { setPosts, addPost } = postSlice.actions
 export default postSlice.reducer

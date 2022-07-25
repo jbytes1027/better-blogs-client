@@ -11,6 +11,7 @@ import { LoggedInUserLocalStorageKey } from "./config"
 import UserList from "./components/users/UserList"
 import UserView from "./components/users/UserView"
 import PostView from "./components/posts/PostView"
+import PostList from "./components/posts/PostList"
 
 const App = () => {
   const dispatch = useDispatch()
@@ -42,6 +43,7 @@ const App = () => {
         <Route path="/login" element={<LoginView />} />
         <Route path="/users" element={<UserList />} />
         <Route path="/users/:userId" element={<UserView />} />
+        <Route path="/posts/all" element={<PostList />} />
         <Route path="/posts/create" element={<CreatePostForm />} />
         <Route path="/posts/:postId" element={<PostView />} />
       </Routes>

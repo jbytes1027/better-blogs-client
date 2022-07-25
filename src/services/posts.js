@@ -31,6 +31,22 @@ const post = async (post) => {
   return response.data
 }
 
+const comment = async (postId, comment) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  }
+
+  const commentJson = {
+    message: comment
+  }
+
+  const response = await axios.post(`${baseUrl}/${postId}/comments`, commentJson, config)
+  return response.data
+}
+
 const like = async (post) => {
   const likedPost = {
     ...post,
@@ -44,6 +60,6 @@ const remove = async (post) => {
   await axios.delete(`${baseUrl}/${post.id}`)
 }
 
-const exports = { like, getAll, get, post, setToken, remove }
+const exports = { like, getAll, get, post, setToken, remove, comment }
 
 export default exports

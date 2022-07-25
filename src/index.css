@@ -1,9 +1,9 @@
 :root {
-    --bg-color: #012E6E;
-    --fg-color: #8FBEFF;
+    --bg-color: #003866;
+    --fg-color: #94CFFF;
     --line-size: 2px;
     --padding: 0.5em;
-    --margin: 1em;
+    --margin: 1rem;
 }
 
 * {
@@ -15,7 +15,7 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-button, input {
+button, input, .comment {
     border: var(--line-size) solid var(--fg-color);
     padding: var(--padding);
     margin: var(--padding) 0;
@@ -23,6 +23,7 @@ button, input {
 
 button {
     font-weight: bold;
+    margin-right: var(--margin);
 }
 
 input:focus, .post:hover, button:hover {
@@ -32,8 +33,20 @@ input:focus, .post:hover, button:hover {
 
 .post {
     border: var(--line-size) solid var(--fg-color);
-    margin: var(--padding);
     padding: var(--padding);
+    margin-bottom: var(--margin);
+}
+
+.post > .post-title {
+    font-weight: bold;
+    background-color: inherit;
+    color: inherit;
+}
+
+hr {
+    border: none;
+    border-top: var(--line-size) solid var(--fg-color);
+    margin: var(--margin) 0;
 }
 
 form input {
@@ -48,12 +61,20 @@ form button {
     margin-right: var(--margin);
 }
 
-form {
+form > div {
+    font-weight: bold;
+}
+
+body {
     margin: var(--margin)
 }
 
-form > * {
-    font-weight: bold;
+.comment {
+    margin: var(--margin) 0
+}
+
+#input-comment {
+    margin-right: var(--margin);
 }
 
 #notification {
@@ -83,6 +104,14 @@ form :disabled {
     pointer-events: none;
 }
 
+.post-details {
+    line-height: 1.5;
+}
+
+b {
+    font-weight: bold;
+}
+
 h1 {
     font-weight: bold;
     font-size: x-large;
@@ -92,8 +121,4 @@ h1 {
 h2 {
     font-weight: bold;
     font-size: large;
-}
-
-.post-info {
-    font-size: small;
 }

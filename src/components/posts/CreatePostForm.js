@@ -61,8 +61,8 @@ const CreatePostForm = () => {
         <br />
         <input {...register("input-post-url", { required: true })} />
       </div>
-      <button type="submit" disabled={!isValid || isLoading}>create</button>
-      <button onClick={onBack}>back</button>
+      <button type="submit" disabled={!isValid || isLoading}>Create</button>
+      <button onClick={onBack}>Back</button>
     </form>
   )
 }
