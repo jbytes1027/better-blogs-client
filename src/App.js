@@ -46,6 +46,7 @@ const App = () => {
         <Route path="/posts/all" element={<PostList />} />
         <Route path="/posts/create" element={<CreatePostForm />} />
         <Route path="/posts/:postId" element={<PostView />} />
+        <Route path="*" element={<h1>404 Page Not Found</h1>} />
       </Routes>
       <Notification />
     </div>
