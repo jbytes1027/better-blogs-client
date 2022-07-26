@@ -20,14 +20,18 @@ const App = () => {
   const location = useLocation()
 
   useEffect(() => {
+    handleTryLoginSaved()
+
+    dispatch(fetchPosts())
+  }, [])
+
+  const handleTryLoginSaved = async () => {
     const storedUser = JSON.parse(
       window.localStorage.getItem(LoggedInUserLocalStorageKey)
     )
     dispatch(setUser(storedUser === "null" ? null : storedUser))
     if (storedUser) PostService.setToken(storedUser.token)
-
-    dispatch(fetchPosts())
-  }, [])
+  }
 
   // eslint-disable-next-line no-unused-vars
   const handleLogout = async () => {
@@ -40,7 +44,7 @@ const App = () => {
 
   return (
     <>
-      <NavBar />
+      <NavBar loggedInUser={user} />
       <div className="content">
         <Routes>
           <Route path="/login" element={<LoginView />} />

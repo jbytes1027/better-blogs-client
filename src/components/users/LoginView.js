@@ -1,15 +1,19 @@
 import { useDispatch } from "react-redux"
 import { setUser } from "../../state/userReducer"
-import LoginForm from "./LoginForm"
 import { notify, Type as notifyType } from "../../state/notificationReducer"
 import PostService from "../../services/posts"
 import SessionService from "../../services/session"
 import { LoggedInUserLocalStorageKey } from "../../config"
+import { useForm } from "react-hook-form"
+import { useState } from "react"
 
-const LoginView = () => {
+const LoginForm = () => {
   const dispatch = useDispatch()
+  const { register, handleSubmit, formState } = useForm({ shouldFocusError: false, mode: "onChange" })
+  const { isValid } = formState
+  const [isLoading, setIsLoading] = useState(false)
 
-  const handleLoginAttempt = async (username, password) => {
+  const tryLogin = async (username, password) => {
     try {
       const user = await SessionService.login(username, password)
       dispatch(setUser(user))
@@ -19,15 +23,48 @@ const LoginView = () => {
         JSON.stringify(user)
       )
     } catch (e) {
-      notify("unauthorized", notifyType.Error)
+      dispatch(notify("Error logging in", notifyType.Error))
+    }
+  }
+
+  const onSubmit = (data) => {
+    try {
+      setIsLoading(true)
+      tryLogin(data["input-login-username"], data["input-login-password"])
+      setIsLoading(false)
+    } catch (error) {
+      if (error.name === 'AxiosError') {
+        dispatch(notify(error.message))
+      } else {
+        dispatch(notify("Error"))
+      }
+      setIsLoading(false)
     }
   }
 
   return (
-    <div>
-      <h2>Login</h2>
-      <LoginForm onSubmit={handleLoginAttempt} />
-    </div>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div>
+        Username
+        <br />
+        <input {...register("input-login-username", { required: true })} />
+      </div>
+      <div>
+        Password
+        <br />
+        <input type="password" {...register("input-login-password", { required: true })} />
+      </div>
+      <button type="submit" disabled={!isValid || isLoading}>Login</button>
+    </form>
+  )
+}
+
+const LoginView = () => {
+  return (
+    <>
+      <h1>Login</h1>
+      <LoginForm />
+    </>
   )
 }
 

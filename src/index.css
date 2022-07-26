@@ -31,6 +31,14 @@
     padding: var(--padding);
 }
 
+.nav-bar > hr {
+    display: none;
+}
+
+.nav-bar > hr ~ * {
+    float:right;
+}
+
 button, input, .comment {
     border: var(--line-size) solid var(--fg-color);
     padding: var(--padding);
