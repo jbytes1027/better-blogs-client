@@ -1,44 +1,25 @@
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import { List, ListItem } from "../List"
 
-const Post = ({ post }) => {
+const PostList = ({ filter }) => {
+  const posts = useSelector((state) => state.posts)
   const navigate = useNavigate()
 
-  const handleClick = () => {
-    navigate(`/posts/${post.id}`)
-  }
-
-  const timePosted = new Date(post.time)
-
-  return (
-    <div className="list-item" onClick={handleClick}>
-      <div className={"list-item-title"}>
-        {post.title}
-      </div>
-      by {post.author} • posted {timePosted.toLocaleDateString()} • {post.likes} likes
-    </div>
-  )
-}
-
-const PostList = ({ filter, title }) => {
-  const posts = useSelector((state) => state.posts)
-
   if (!filter) filter = () => (true)
-  if (!title) title = "Posts"
 
   return (
-    <>
-      <h1>{title}</h1>
-      <div className="list">
-        {posts
-          .slice()
-          .filter(filter)
-          .sort((a, b) => b.likes - a.likes)
-          .map((post) => (
-            <Post key={post.id} post={post} />
-          ))}
-      </div>
-    </>
+    <List>
+      {posts
+        .slice()
+        .filter(filter)
+        .sort((a, b) => b.likes - a.likes)
+        .map((post) => (
+          <ListItem key={post.id} header={post.title} onClick={() => navigate(`/posts/${post.id}`)}>
+            by {post.author} • posted {new Date(post.time).toLocaleDateString()} • {post.likes} likes
+          </ListItem>
+        ))}
+    </List>
   )
 }
 

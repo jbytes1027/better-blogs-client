@@ -8,11 +8,11 @@ import { setUser } from "./state/userReducer"
 import { Route, Routes, Navigate, useLocation } from "react-router"
 import LoginView from "./components/users/LoginView"
 import { LoggedInUserLocalStorageKey } from "./config"
-import UserList from "./components/users/UserList"
+import UsersView from "./components/users/UsersView"
 import UserView from "./components/users/UserView"
 import PostView from "./components/posts/PostView"
-import PostList from "./components/posts/PostList"
 import NavBar from "./components/NavBar"
+import PostsView from "./components/posts/PostsView"
 
 const App = () => {
   const dispatch = useDispatch()
@@ -47,10 +47,10 @@ const App = () => {
       <NavBar loggedInUser={user} />
       <div className="content">
         <Routes>
-          <Route path="/login" element={<LoginView />} />
-          <Route path="/users/all" element={<UserList />} />
+          <Route path="/users/login" element={<LoginView />} />
+          <Route path="/users/all" element={<UsersView />} />
           <Route path="/users/:userId" element={<UserView />} />
-          <Route path="/posts/all" element={<PostList />} />
+          <Route path="/posts/all" element={<PostsView />} />
           <Route path="/posts/create" element={<CreatePostForm />} />
           <Route path="/posts/:postId" element={<PostView />} />
           <Route path="*" element={<h1>404 Page Not Found</h1>} />

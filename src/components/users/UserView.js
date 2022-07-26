@@ -16,7 +16,10 @@ const UserView = () => {
   if (!user) return null
 
   return (
-    <PostList title={`${user.username} Posts`} filter={(i) => i.user.id === user.id} />
+    <>
+      <h1>{`${user.username} Posts`}</h1>
+      <PostList filter={(i) => i.user.id === user.id} />
+    </>
   )
 }
 

@@ -39,7 +39,7 @@
     float:right;
 }
 
-button, input, .comment {
+button, input {
     border: var(--line-size) solid var(--fg-color);
     padding: var(--padding);
     margin: var(--padding) 0;
@@ -55,16 +55,16 @@ input:focus, .list-item:hover, button:hover {
     outline-offset: -4px;
 }
 
-.list-item {
+.list > * {
     border: var(--line-size) solid var(--fg-color);
     padding: var(--padding);
     margin-bottom: var(--margin);
 }
 
-.list-item-title {
+.list-item-header {
     font-weight: bold;
     background-color: inherit;
-    color: inherit;
+    color: inherit
 }
 
 hr {

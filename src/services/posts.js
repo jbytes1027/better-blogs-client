@@ -60,6 +60,5 @@ const remove = async (post) => {
   await axios.delete(`${baseUrl}/${post.id}`)
 }
 
-const exports = { like, getAll, get, post, setToken, remove, comment }
 
-export default exports
+export default { like, getAll, get, post, setToken, remove, comment }

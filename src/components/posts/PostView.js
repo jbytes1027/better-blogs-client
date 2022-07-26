@@ -5,6 +5,7 @@ import { notify } from "../../state/notificationReducer"
 import { useForm } from "react-hook-form"
 import { useState } from "react"
 import PostService from "../../services/posts"
+import { List } from "../List"
 
 const PostView = () => {
   const params = useParams()
@@ -44,13 +45,13 @@ const PostView = () => {
 }
 
 const CommentList = ({ comments }) => (
-  <div className="post-comments">
+  <List>
     {comments.slice().reverse().map((c, i) => (
       <div className="comment" key={i}>
         {c}
       </div>
     ))}
-  </div>
+  </List>
 )
 
 const CreateCommentForm = ({ post }) => {
