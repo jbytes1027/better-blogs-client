@@ -56,9 +56,10 @@ input:focus, .list-item:hover, button:hover {
 }
 
 .list > * {
+    margin: var(--margin) 0;
     border: var(--line-size) solid var(--fg-color);
     padding: var(--padding);
-    margin-bottom: var(--margin);
+    overflow: hidden;
 }
 
 .list-item-header {
@@ -91,10 +92,6 @@ form > div {
 
 .content {
     margin: var(--margin)
-}
-
-.comment {
-    margin: var(--margin) 0
 }
 
 #input-comment {
