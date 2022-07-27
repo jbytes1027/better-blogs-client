@@ -20,9 +20,11 @@
   position: absolute;
   bottom: 0;
   left: 0;
+  box-sizing: border-box;
   /* TODO fix */
-  padding: var(--padding) calc((100% - var(--max-width)) / 2);
-  width: min(var(--max-width), 100%);
+  padding: var(--padding)
+    max(var(--padding), calc((100% - var(--max-width)) / 2 - var(--padding)));
+  width: 100%;
   font-weight: bold;
   background-color: var(--fg-color);
   color: var(--bg-color);
