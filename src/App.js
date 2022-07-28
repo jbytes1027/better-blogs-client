@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import CreatePostForm from "./components/posts/CreatePostForm"
+import CreatePostView from "./components/posts/CreatePostView"
 import PostService from "./services/posts"
 import { default as Notification } from "./components/Notification"
 import { useDispatch, useSelector } from "react-redux"
@@ -51,7 +51,7 @@ const App = () => {
           <Route path="/users/all" element={<UsersView />} />
           <Route path="/users/:userId" element={<UserView />} />
           <Route path="/posts/all" element={<PostsView />} />
-          <Route path="/posts/create" element={<CreatePostForm />} />
+          <Route path="/posts/create" element={<CreatePostView />} />
           <Route path="/posts/:postId" element={<PostView />} />
           <Route path="*" element={<h1>404 Page Not Found</h1>} />
         </Routes>

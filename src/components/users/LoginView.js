@@ -4,58 +4,47 @@ import { notify, Type as notifyType } from "../../state/notificationReducer"
 import PostService from "../../services/posts"
 import SessionService from "../../services/session"
 import { LoggedInUserLocalStorageKey } from "../../config"
-import { useForm } from "react-hook-form"
-import { useState } from "react"
+import Form from "../Form"
 
 const LoginForm = () => {
   const dispatch = useDispatch()
-  const { register, handleSubmit, formState } = useForm({ shouldFocusError: false, mode: "onChange" })
-  const { isValid } = formState
-  const [isLoading, setIsLoading] = useState(false)
 
-  const tryLogin = async (username, password) => {
+  const onSubmit = async (data) => {
     try {
-      const user = await SessionService.login(username, password)
+      const user = await SessionService.login(data["input-username"], data["input-password"])
       dispatch(setUser(user))
       PostService.setToken(user.token)
       window.localStorage.setItem(
         LoggedInUserLocalStorageKey,
         JSON.stringify(user)
       )
-    } catch (e) {
-      dispatch(notify("Error logging in", notifyType.Error))
-    }
-  }
-
-  const onSubmit = (data) => {
-    try {
-      setIsLoading(true)
-      tryLogin(data["input-login-username"], data["input-login-password"])
-      setIsLoading(false)
+      return true
     } catch (error) {
       if (error.name === 'AxiosError') {
         dispatch(notify(error.message))
       } else {
-        dispatch(notify("Error"))
+        dispatch(notify("Error logging in", notifyType.Error))
       }
-      setIsLoading(false)
+      return false
     }
   }
 
+  const inputs = [
+    {
+      text: "Username",
+      id: "input-username"
+    },
+    {
+      text: "Password",
+      id: "input-password",
+      attributes: {
+        type: "password",
+      }
+    }
+  ]
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        Username
-        <br />
-        <input {...register("input-login-username", { required: true })} />
-      </div>
-      <div>
-        Password
-        <br />
-        <input type="password" {...register("input-login-password", { required: true })} />
-      </div>
-      <button type="submit" disabled={!isValid || isLoading}>Login</button>
-    </form>
+    <Form inputs={inputs} onAsyncSubmit={onSubmit} submitText="Login" />
   )
 }
 
