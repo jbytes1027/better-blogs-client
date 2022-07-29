@@ -2,6 +2,7 @@ import UserService from "../../services/users"
 import { useEffect, useState } from "react"
 import { List, ListItem } from "../List"
 import { useNavigate } from "react-router-dom"
+import { useSelector } from "react-redux"
 
 const UserView = () => (
   <>
@@ -22,7 +23,7 @@ const UserList = () => {
   return (
     <List>
       {users.map((user) => (
-        <ListItem key={user.id} header={user.username} onClick={() => navigate(`/posts/${user.id}`)}>
+        <ListItem key={user.id} header={user.username} onClick={() => navigate(`/users/${user.id}`)}>
           {user.posts.length} posts
         </ListItem>
       ))}
