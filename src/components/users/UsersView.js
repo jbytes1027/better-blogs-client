@@ -2,7 +2,6 @@ import UserService from "../../services/users"
 import { useEffect, useState } from "react"
 import { List, ListItem } from "../List"
 import { useNavigate } from "react-router-dom"
-import { useSelector } from "react-redux"
 
 const UserView = () => (
   <>

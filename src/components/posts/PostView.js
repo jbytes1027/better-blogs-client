@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { fetchPosts, updatePost } from "../../state/postsReducer"
-import { Link, useParams } from "react-router-dom"
+import { removePost } from "../../state/postsReducer"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { notify } from "../../state/notificationReducer"
 import { useForm } from "react-hook-form"
 import { useState } from "react"
@@ -12,10 +13,17 @@ const PostView = () => {
   const postId = params.postId
   const post = useSelector(state => state.posts?.find(p => p.id === postId))
   const dispatch = useDispatch()
+  const loggedInUser = useSelector((state) => state.user)
+  const navigate = useNavigate()
 
   const onLike = () => {
     const updatedPost = { ...post }
     dispatch(updatePost(updatedPost))
+  }
+
+  const onDelete = () => {
+    navigate(`/users/${post.user.id}`)
+    dispatch(removePost(post))
   }
 
   if (!post) {
@@ -37,6 +45,7 @@ const PostView = () => {
         <b>Likes:</b> {post.likes}
       </div>
       <button onClick={onLike}>Like</button>
+      {loggedInUser.id === post.user.id && <><br /><button onClick={onDelete}>Delete</button></>}
       <hr />
       <CreateCommentForm post={post} />
       <CommentList comments={post.comments} />
