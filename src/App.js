@@ -1,13 +1,11 @@
 import { useEffect } from "react"
 import CreatePostView from "./components/posts/CreatePostView"
-import PostService from "./services/posts"
 import { default as Notification } from "./components/Notification"
 import { useDispatch, useSelector } from "react-redux"
-import { fetchPosts } from "./state/postsReducer"
-import { setUser } from "./state/userReducer"
+import { fetchPosts } from "./state/postThunks"
+import { tryLoginFromSaved } from "./state/userReducer"
 import { Route, Routes, Navigate, useLocation } from "react-router"
 import LoginView from "./components/users/LoginView"
-import { LoggedInUserLocalStorageKey } from "./config"
 import UsersView from "./components/users/UsersView"
 import UserView from "./components/users/UserView"
 import PostView from "./components/posts/PostView"
@@ -20,27 +18,11 @@ const App = () => {
   const location = useLocation()
 
   useEffect(() => {
-    handleTryLoginSaved()
-
+    dispatch(tryLoginFromSaved())
     dispatch(fetchPosts())
   }, [])
 
-  const handleTryLoginSaved = async () => {
-    const storedUser = JSON.parse(
-      window.localStorage.getItem(LoggedInUserLocalStorageKey)
-    )
-    dispatch(setUser(storedUser === "null" ? null : storedUser))
-    if (storedUser) PostService.setToken(storedUser.token)
-  }
-
-  // eslint-disable-next-line no-unused-vars
-  const handleLogout = async () => {
-    dispatch(setUser(null))
-    PostService.setToken(null)
-    window.localStorage.removeItem(LoggedInUserLocalStorageKey)
-  }
-
-  if (!user && location.pathname !== '/login') return (<Navigate to="/login" />)
+  if (!user && location.pathname !== '/posts/create') return (<Navigate to="/login" />)
 
   return (
     <>

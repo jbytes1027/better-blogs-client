@@ -1,26 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit"
-import PostService from "../services/posts"
 
 // title: String,
 // author: String,
 // url: String,
 // likes: Number,
 // user:
-
-const fetchPosts = () => async (dispatch) => {
-  const posts = await PostService.getAll()
-  dispatch(setPosts(posts))
-}
-
-const likePost = (post) => async (dispatch) => {
-  const updatedPost = await PostService.like(post)
-  dispatch(postSlice.actions.updatePost(updatedPost))
-}
-
-const removePost = (post) => async (dispatch) => {
-  await PostService.remove(post)
-  dispatch(postSlice.actions.removePost(post))
-}
 
 const postSlice = createSlice({
   name: "post",
@@ -45,6 +29,5 @@ const postSlice = createSlice({
   },
 })
 
-export { fetchPosts, likePost as updatePost, removePost }
-export const { setPosts, addPost } = postSlice.actions
+export const { setPosts, addPost, updatePost, removePost } = postSlice.actions
 export default postSlice.reducer

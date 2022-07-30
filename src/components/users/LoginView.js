@@ -1,9 +1,7 @@
 import { useDispatch } from "react-redux"
-import { setUser } from "../../state/userReducer"
+import { login } from "../../state/userReducer"
 import { notify, Type as notifyType } from "../../state/notificationReducer"
-import PostService from "../../services/posts"
 import SessionService from "../../services/session"
-import { LoggedInUserLocalStorageKey } from "../../config"
 import Form from "../Form"
 
 const LoginForm = () => {
@@ -12,12 +10,7 @@ const LoginForm = () => {
   const onSubmit = async (data) => {
     try {
       const user = await SessionService.login(data["input-username"], data["input-password"])
-      dispatch(setUser(user))
-      PostService.setToken(user.token)
-      window.localStorage.setItem(
-        LoggedInUserLocalStorageKey,
-        JSON.stringify(user)
-      )
+      dispatch(login(user))
       return true
     } catch (error) {
       if (error.name === 'AxiosError') {

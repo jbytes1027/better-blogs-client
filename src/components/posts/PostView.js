@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { fetchPosts, updatePost } from "../../state/postsReducer"
+import { fetchPosts, likePost } from "../../state/postThunks"
 import { removePost } from "../../state/postsReducer"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { notify } from "../../state/notificationReducer"
@@ -18,7 +18,7 @@ const PostView = () => {
 
   const onLike = () => {
     const updatedPost = { ...post }
-    dispatch(updatePost(updatedPost))
+    dispatch(likePost(updatedPost))
   }
 
   const onDelete = () => {

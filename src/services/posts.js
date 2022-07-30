@@ -1,12 +1,12 @@
+import store from "../state/store"
 import axios from "axios"
 import { BACKEND_URL } from "../config"
 
 const baseUrl = `${BACKEND_URL}/api/posts`
 
-let token
-
-const setToken = (newToken) => {
-  token = newToken
+const getCurrToken = () => {
+  console.log(store)
+  return store.getState().user.token
 }
 
 const get = async (postId) => {
@@ -22,7 +22,7 @@ const getAll = async () => {
 const post = async (post) => {
   const config = {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${getCurrToken()}`,
       "Content-Type": "application/json",
     },
   }
@@ -34,7 +34,7 @@ const post = async (post) => {
 const comment = async (postId, comment) => {
   const config = {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${getCurrToken()}`,
       "Content-Type": "application/json",
     },
   }
@@ -60,5 +60,4 @@ const remove = async (post) => {
   await axios.delete(`${baseUrl}/${post.id}`)
 }
 
-
-export default { like, getAll, get, post, setToken, remove, comment }
+export default { like, getAll, get, post, remove, comment }
