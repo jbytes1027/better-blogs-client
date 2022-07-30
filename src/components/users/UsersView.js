@@ -19,6 +19,8 @@ const UserList = () => {
       .then(users => setUsers(users))
   }, [])
 
+  if (users.length === 0) return (<h2>No Users Found</h2>)
+
   return (
     <List>
       {users.map((user) => (
