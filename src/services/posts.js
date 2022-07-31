@@ -5,7 +5,6 @@ import { BACKEND_URL } from "../config"
 const baseUrl = `${BACKEND_URL}/api/posts`
 
 const getCurrToken = () => {
-  console.log(store)
   return store.getState().user.token
 }
 
