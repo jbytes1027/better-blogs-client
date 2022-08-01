@@ -3,14 +3,17 @@ import { login } from "../../state/userReducer"
 import { notify, Type as notifyType } from "../../state/notificationReducer"
 import SessionService from "../../services/session"
 import Form from "../Form"
+import { useNavigate } from "react-router-dom"
 
 const LoginForm = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const onSubmit = async (data) => {
     try {
       const user = await SessionService.login(data["input-username"], data["input-password"])
       dispatch(login(user))
+      navigate(`/users/${user.id}`)
       return true
     } catch (error) {
       if (error.name === 'AxiosError') {

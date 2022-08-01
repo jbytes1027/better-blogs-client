@@ -20,7 +20,7 @@ const UserView = () => {
 
   if (!user) return null
 
-  if (user.id === loggedInUser.id) {
+  if (user.id === loggedInUser?.id) {
     return (
       <>
         <h1>{user.username} Profile</h1>

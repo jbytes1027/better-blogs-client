@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
 const NavBar = ({ loggedInUser }) => {
-  let userElement = <Link to="/users/login">login</Link>
+  let userElement = <Link to="/users/login">Login</Link>
   if (loggedInUser) {
     userElement = <Link to={`/users/${loggedInUser.id}`} >{loggedInUser.username}</ Link>
   }

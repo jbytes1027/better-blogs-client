@@ -165,4 +165,5 @@ h1 {
 h2 {
   font-weight: bold;
   font-size: large;
+  margin: var(--margin) 0;
 }

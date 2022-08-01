@@ -22,13 +22,14 @@ const App = () => {
     dispatch(fetchPosts())
   }, [])
 
-  if (!user && location.pathname !== '/posts/create') return (<Navigate to="/login" />)
+  if (!user && location.pathname === '/posts/create') return (<Navigate to="/users/login" />)
 
   return (
     <>
       <NavBar loggedInUser={user} />
       <div className="content">
         <Routes>
+          <Route path="/" element={<Navigate to="/posts/all" />} />
           <Route path="/users/login" element={<LoginView />} />
           <Route path="/users/all" element={<UsersView />} />
           <Route path="/users/:userId" element={<UserView />} />
