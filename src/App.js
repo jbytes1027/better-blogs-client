@@ -11,6 +11,7 @@ import UserView from "./components/users/UserView"
 import PostView from "./components/posts/PostView"
 import NavBar from "./components/NavBar"
 import PostsView from "./components/posts/PostsView"
+import RegisterView from "./components/users/RegisterView"
 
 const App = () => {
   const dispatch = useDispatch()
@@ -31,6 +32,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Navigate to="/posts/all" />} />
           <Route path="/users/login" element={<LoginView />} />
+          <Route path="/users/register" element={<RegisterView />} />
           <Route path="/users/all" element={<UsersView />} />
           <Route path="/users/:userId" element={<UserView />} />
           <Route path="/posts/all" element={<PostsView />} />

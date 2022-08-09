@@ -5,12 +5,13 @@ import SessionService from "../../services/session"
 import Form from "../Form"
 import { useNavigate } from "react-router-dom"
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const onSubmit = async (data) => {
     try {
+      await SessionService.register(data["input-username"], data["input-password"])
       const user = await SessionService.login(data["input-username"], data["input-password"])
       dispatch(login(user))
       navigate(`/users/${user.id}`)
@@ -19,7 +20,7 @@ const LoginForm = () => {
       if (error.name === 'AxiosError') {
         dispatch(notify(error.message))
       } else {
-        dispatch(notify("Error logging in", notifyType.Error))
+        dispatch(notify("Error registering in", notifyType.Error))
       }
       return false
     }
@@ -40,20 +41,17 @@ const LoginForm = () => {
   ]
 
   return (
-    <Form inputs={inputs} onAsyncSubmit={onSubmit} submitText="Login" />
+    <Form inputs={inputs} onAsyncSubmit={onSubmit} submitText="Register" />
   )
 }
 
-const LoginView = () => {
-  const navigate = useNavigate()
-
+const RegisterView = () => {
   return (
     <>
-      <h1>Login</h1>
-      <LoginForm />
-      <button onClick={() => (navigate('/users/register'))}>Register</button>
+      <h1>Register</h1>
+      <RegisterForm />
     </>
   )
 }
 
-export default LoginView
+export default RegisterView
