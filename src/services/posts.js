@@ -8,6 +8,15 @@ const getCurrToken = () => {
   return store.getState().user.token
 }
 
+const getAuthHeaderConfig = () => {
+  return {
+    headers: {
+      Authorization: `Bearer ${getCurrToken()}`,
+      "Content-Type": "application/json",
+    },
+  }
+}
+
 const get = async (postId) => {
   const res = await axios.put(`${baseUrl}/${postId}`)
   return res.data
@@ -19,44 +28,38 @@ const getAll = async () => {
 }
 
 const post = async (post) => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${getCurrToken()}`,
-      "Content-Type": "application/json",
-    },
-  }
-
-  const response = await axios.post(baseUrl, post, config)
+  const response = await axios.post(baseUrl, post, getAuthHeaderConfig())
   return response.data
 }
 
 const comment = async (postId, comment) => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${getCurrToken()}`,
-      "Content-Type": "application/json",
-    },
-  }
-
   const commentJson = {
-    message: comment
+    message: comment,
   }
 
-  const response = await axios.post(`${baseUrl}/${postId}/comments`, commentJson, config)
+  const response = await axios.post(
+    `${baseUrl}/${postId}/comments`,
+    commentJson,
+    getAuthHeaderConfig()
+  )
+
   return response.data
 }
 
 const like = async (post) => {
   const likedPost = {
-    ...post,
     likes: post.likes + 1,
   }
-  const res = await axios.put(`${baseUrl}/${post.id}`, likedPost)
+  const res = await axios.put(
+    `${baseUrl}/${post.id}`,
+    likedPost,
+    getAuthHeaderConfig()
+  )
   return res.data
 }
 
 const remove = async (post) => {
-  await axios.delete(`${baseUrl}/${post.id}`)
+  await axios.delete(`${baseUrl}/${post.id}`, getAuthHeaderConfig())
 }
 
 export default { like, getAll, get, post, remove, comment }
