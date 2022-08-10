@@ -20,6 +20,7 @@
     "start": "serve -s build",
     "dev": "react-scripts start",
     "build": "react-scripts build",
+    "postbuild": "ls -a | grep -v build | xargs rm -r ; npm i serve npm-add-script ; npx npm-add-script -k 'start' -v 'serve -s build'",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "npx prettier --ignore-path=.gitignore --loglevel=warn --check . && npx eslint --ignore-path=.gitignore . && echo 'Check Complete.'",
