@@ -1,5 +1,9 @@
 import PostService from "../services/posts"
-import { setPosts, updatePost, removePost as removeStorePost } from "./postsReducer"
+import {
+  setPosts,
+  updatePost,
+  removePost as removeStorePost,
+} from "./postsReducer"
 
 export const fetchPosts = () => async (dispatch) => {
   const posts = await PostService.getAll()

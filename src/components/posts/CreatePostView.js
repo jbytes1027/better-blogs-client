@@ -23,7 +23,7 @@ const CreatePostForm = () => {
       navigate(`/posts/${createdPost.id}`)
       return true
     } catch (error) {
-      if (error.name === 'AxiosError') {
+      if (error.name === "AxiosError") {
         dispatch(notify(error.message))
       } else {
         dispatch(notify("Error"))
@@ -44,7 +44,7 @@ const CreatePostForm = () => {
     {
       text: "URL",
       id: "input-post-url",
-    }
+    },
   ]
 
   return (
@@ -54,9 +54,7 @@ const CreatePostForm = () => {
 
 const CreatePostView = () => (
   <>
-    <h1>
-      Create a Post
-    </h1>
+    <h1>Create a Post</h1>
     <CreatePostForm />
   </>
 )

@@ -11,12 +11,15 @@ const LoginForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      const user = await SessionService.login(data["input-username"], data["input-password"])
+      const user = await SessionService.login(
+        data["input-username"],
+        data["input-password"]
+      )
       dispatch(login(user))
       navigate(`/users/${user.id}`)
       return true
     } catch (error) {
-      if (error.name === 'AxiosError') {
+      if (error.name === "AxiosError") {
         dispatch(notify(error.message))
       } else {
         dispatch(notify("Error logging in", notifyType.Error))
@@ -28,20 +31,18 @@ const LoginForm = () => {
   const inputs = [
     {
       text: "Username",
-      id: "input-username"
+      id: "input-username",
     },
     {
       text: "Password",
       id: "input-password",
       attributes: {
         type: "password",
-      }
-    }
+      },
+    },
   ]
 
-  return (
-    <Form inputs={inputs} onAsyncSubmit={onSubmit} submitText="Login" />
-  )
+  return <Form inputs={inputs} onAsyncSubmit={onSubmit} submitText="Login" />
 }
 
 const LoginView = () => {
@@ -51,7 +52,7 @@ const LoginView = () => {
     <>
       <h1>Login</h1>
       <LoginForm />
-      <button onClick={() => (navigate('/users/register'))}>Register</button>
+      <button onClick={() => navigate("/users/register")}>Register</button>
     </>
   )
 }

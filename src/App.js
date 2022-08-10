@@ -23,7 +23,8 @@ const App = () => {
     dispatch(fetchPosts())
   }, [])
 
-  if (!user && location.pathname === '/posts/create') return (<Navigate to="/users/login" />)
+  if (!user && location.pathname === "/posts/create")
+    return <Navigate to="/users/login" />
 
   return (
     <>

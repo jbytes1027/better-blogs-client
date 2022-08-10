@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { LoggedInUserLocalStorageKey } from "../config"
+import UserService from "../services/users"
 
 /*
 username,
@@ -13,17 +14,19 @@ const logout = () => async (dispatch) => {
 }
 
 const login = (user) => async (dispatch) => {
-  window.localStorage.setItem(
-    LoggedInUserLocalStorageKey,
-    JSON.stringify(user)
-  )
+  window.localStorage.setItem(LoggedInUserLocalStorageKey, JSON.stringify(user))
   dispatch(setUser(user))
 }
 
 const tryLoginFromSaved = () => async (dispatch) => {
-  const storedUser = JSON.parse(
+  let storedUser = JSON.parse(
     window.localStorage.getItem(LoggedInUserLocalStorageKey)
   )
+
+  // verify stored user exists
+  const res = await UserService.getUser()
+  if (res.status === 200) storedUser = null
+
   dispatch(setUser(storedUser === "null" ? null : storedUser))
 }
 

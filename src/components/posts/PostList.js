@@ -6,18 +6,25 @@ const PostList = ({ filter }) => {
   const posts = useSelector((state) => state.posts)
   const navigate = useNavigate()
 
-  if (!filter) filter = () => (true)
+  if (!filter) filter = () => true
 
   const filteredPosts = posts.slice().filter(filter)
-  if (!filteredPosts || filteredPosts.length === 0) { return (<h2>No Posts Found</h2>) }
+  if (!filteredPosts || filteredPosts.length === 0) {
+    return <h2>No Posts Found</h2>
+  }
 
   return (
     <List>
       {filteredPosts
         .sort((a, b) => b.likes - a.likes)
         .map((post) => (
-          <ListItem key={post.id} header={post.title} onClick={() => navigate(`/posts/${post.id}`)}>
-            by {post.author} • posted {new Date(post.time).toLocaleDateString()} • {post.likes} likes
+          <ListItem
+            key={post.id}
+            header={post.title}
+            onClick={() => navigate(`/posts/${post.id}`)}
+          >
+            by {post.author} • posted {new Date(post.time).toLocaleDateString()}{" "}
+            • {post.likes} likes
           </ListItem>
         ))}
     </List>

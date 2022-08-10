@@ -14,7 +14,10 @@ import { useState } from "react"
 */
 
 const Form = ({ inputs, onAsyncSubmit, submitText }) => {
-  const { register, handleSubmit, formState, reset } = useForm({ shouldFocusError: false, mode: "onChange" })
+  const { register, handleSubmit, formState, reset } = useForm({
+    shouldFocusError: false,
+    mode: "onChange",
+  })
   const { isValid } = formState
   const [isLoading, setIsLoading] = useState(false)
 
@@ -39,8 +42,18 @@ const Form = ({ inputs, onAsyncSubmit, submitText }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {inputs.map(i => <FormInput register={register} key={i.id} text={i.text} id={i.id} attributes={i.attributes} />)}
-      <button type="submit" disabled={!isValid || isLoading}>{submitText}</button>
+      {inputs.map((i) => (
+        <FormInput
+          register={register}
+          key={i.id}
+          text={i.text}
+          id={i.id}
+          attributes={i.attributes}
+        />
+      ))}
+      <button type="submit" disabled={!isValid || isLoading}>
+        {submitText}
+      </button>
     </form>
   )
 }

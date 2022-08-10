@@ -14,8 +14,7 @@ const UserView = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    UserService.getUser(userId)
-      .then(user => setUser(user))
+    UserService.getUser(userId).then((user) => setUser(user))
   }, [])
 
   if (!user) return null
@@ -24,7 +23,7 @@ const UserView = () => {
     return (
       <>
         <h1>{user.username} Profile</h1>
-        <button onClick={() => navigate('/posts/create')}>Create Post</button>
+        <button onClick={() => navigate("/posts/create")}>Create Post</button>
         <button onClick={() => dispatch(logout())}>Logout</button>
         <h2>Posts</h2>
         <PostList filter={(i) => i.user.id === user.id} />
