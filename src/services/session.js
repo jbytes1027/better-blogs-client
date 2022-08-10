@@ -13,4 +13,5 @@ const register = async (username, password) => {
   return res.data
 }
 
-export default { login, register }
+const SessionService = { login, register }
+export default SessionService

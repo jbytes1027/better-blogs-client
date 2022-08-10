@@ -12,7 +12,7 @@ const Notification = () => {
         dispatch(removeNotification(notifications[0].id))
       }, 3000)
     }
-  }, [notifications])
+  }, [notifications, dispatch])
 
   if (!notifications[0]) {
     return null

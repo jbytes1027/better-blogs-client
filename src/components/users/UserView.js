@@ -7,15 +7,14 @@ import PostList from "../posts/PostList"
 
 const UserView = () => {
   const params = useParams()
-  const userId = params.userId
   const [user, setUser] = useState(null)
   const loggedInUser = useSelector((state) => state.user)
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   useEffect(() => {
-    UserService.getUser(userId).then((user) => setUser(user))
-  }, [])
+    UserService.getUser(params.userId).then((user) => setUser(user))
+  }, [params.userId])
 
   if (!user) return null
 

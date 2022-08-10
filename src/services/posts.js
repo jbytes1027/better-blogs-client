@@ -62,4 +62,5 @@ const remove = async (post) => {
   await axios.delete(`${baseUrl}/${post.id}`, getAuthHeaderConfig())
 }
 
-export default { like, getAll, get, post, remove, comment }
+const PostService = { like, getAll, get, post, remove, comment }
+export default PostService

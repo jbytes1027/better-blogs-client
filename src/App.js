@@ -21,7 +21,7 @@ const App = () => {
   useEffect(() => {
     dispatch(tryLoginFromSaved())
     dispatch(fetchPosts())
-  }, [])
+  }, [dispatch])
 
   if (!user && location.pathname === "/posts/create")
     return <Navigate to="/users/login" />
