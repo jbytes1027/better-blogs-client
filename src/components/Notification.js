@@ -18,7 +18,10 @@ const Notification = () => {
     return null
   } else {
     return (
-      <div id="notification" className={`notification-${notifications[0].type}`} >
+      <div
+        id="notification"
+        className={`notification-${notifications[0].type}`}
+      >
         {notifications[0].message}
       </div>
     )

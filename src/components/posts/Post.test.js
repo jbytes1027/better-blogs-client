@@ -17,7 +17,7 @@ test("renders content", () => {
   }
 
   const { container } = render(
-    <Post post={post} handleUpdatePosts={() => { }} user={user} />
+    <Post post={post} handleUpdatePosts={() => {}} user={user} />
   )
   const div = container.querySelector(".post")
   expect(div).toHaveTextContent("test title")

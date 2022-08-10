@@ -11,13 +11,19 @@ const RegisterForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      await SessionService.register(data["input-username"], data["input-password"])
-      const user = await SessionService.login(data["input-username"], data["input-password"])
+      await SessionService.register(
+        data["input-username"],
+        data["input-password"]
+      )
+      const user = await SessionService.login(
+        data["input-username"],
+        data["input-password"]
+      )
       dispatch(login(user))
       navigate(`/users/${user.id}`)
       return true
     } catch (error) {
-      if (error.name === 'AxiosError') {
+      if (error.name === "AxiosError") {
         dispatch(notify(error.message))
       } else {
         dispatch(notify("Error registering in", notifyType.Error))
@@ -29,20 +35,18 @@ const RegisterForm = () => {
   const inputs = [
     {
       text: "Username",
-      id: "input-username"
+      id: "input-username",
     },
     {
       text: "Password",
       id: "input-password",
       attributes: {
         type: "password",
-      }
-    }
+      },
+    },
   ]
 
-  return (
-    <Form inputs={inputs} onAsyncSubmit={onSubmit} submitText="Register" />
-  )
+  return <Form inputs={inputs} onAsyncSubmit={onSubmit} submitText="Register" />
 }
 
 const RegisterView = () => {

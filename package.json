@@ -22,8 +22,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "code:check": "npx prettier --loglevel=warn --check . && npx eslint . && echo 'Check Complete.'",
-    "code:fix": "npx prettier --loglevel=warn --write . && npx eslint . --fix && echo 'Fix Complete.'"
+    "lint": "npx prettier --ignore-path=.gitignore --loglevel=warn --check . && npx eslint --ignore-path=.gitignore . && echo 'Check Complete.'",
+    "lint:fix": "npx prettier --ignore-path=.gitignore --loglevel=warn --write . && npx eslint --ignore-path=.gitignore . --fix && echo 'Fix Complete.'"
   },
   "eslintConfig": {
     "extends": [

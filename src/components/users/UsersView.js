@@ -15,16 +15,19 @@ const UserList = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    UserService.getAll()
-      .then(users => setUsers(users))
+    UserService.getAll().then((users) => setUsers(users))
   }, [])
 
-  if (users.length === 0) return (<h2>No Users Found</h2>)
+  if (users.length === 0) return <h2>No Users Found</h2>
 
   return (
     <List>
       {users.map((user) => (
-        <ListItem key={user.id} header={user.username} onClick={() => navigate(`/users/${user.id}`)}>
+        <ListItem
+          key={user.id}
+          header={user.username}
+          onClick={() => navigate(`/users/${user.id}`)}
+        >
           {user.posts.length} posts
         </ListItem>
       ))}

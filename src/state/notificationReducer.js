@@ -7,9 +7,11 @@ export const Type = {
   Error: "error",
 }
 
-export const notify = (message, type = Type.Info) => async (dispatch) => {
-  dispatch(addNotification(message, type, uuid()))
-}
+export const notify =
+  (message, type = Type.Info) =>
+  async (dispatch) => {
+    dispatch(addNotification(message, type, uuid()))
+  }
 
 const notificationSlice = createSlice({
   name: "notification",
