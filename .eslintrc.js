@@ -9,6 +9,8 @@ module.exports = {
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
+    "react-app",
+    "react-app/jest",
     "prettier",
   ],
   plugins: ["react", "react-hooks", "jest"],
