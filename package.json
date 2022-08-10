@@ -2,7 +2,19 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "serve -s build",
+    "dev": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "npx prettier --ignore-path=.gitignore --loglevel=warn --check . && npx eslint --ignore-path=.gitignore . && echo 'Check Complete.'",
+    "lint:fix": "npx prettier --ignore-path=.gitignore --loglevel=warn --write . && npx eslint --ignore-path=.gitignore . --fix && echo 'Fix Complete.'"
+  },
   "dependencies": {
+    "serve": "^14.0.1"
+  },
+  "devDependencies": {
     "@reduxjs/toolkit": "^1.8.3",
     "axios": "^0.27.2",
     "prop-types": "^15.8.1",
@@ -12,25 +24,17 @@
     "react-redux": "^8.0.2",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
-    "serve": "^14.0.1",
     "uuid": "^8.3.2",
-    "web-vitals": "^2.1.4"
-  },
-  "scripts": {
-    "start": "serve -s build",
-    "dev": "react-scripts start",
-    "build": "react-scripts build",
-    "postbuild": "ls | grep -v build | xargs rm -r ; npm i serve npm-add-script ; npx npm-add-script -k 'start' -v 'serve -s build'",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "npx prettier --ignore-path=.gitignore --loglevel=warn --check . && npx eslint --ignore-path=.gitignore . && echo 'Check Complete.'",
-    "lint:fix": "npx prettier --ignore-path=.gitignore --loglevel=warn --write . && npx eslint --ignore-path=.gitignore . --fix && echo 'Fix Complete.'"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "web-vitals": "^2.1.4",
+    "@babel/eslint-parser": "^7.18.2",
+    "@babel/preset-react": "^7.18.6",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^14.2.0",
+    "eslint": "^8.19.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^2.7.1"
   },
   "browserslist": {
     "production": [
@@ -43,16 +47,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@babel/eslint-parser": "^7.18.2",
-    "@babel/preset-react": "^7.18.6",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^14.2.0",
-    "eslint": "^8.19.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "prettier": "^2.7.1"
   }
 }
