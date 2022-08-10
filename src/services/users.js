@@ -13,4 +13,5 @@ const getUser = async (id) => {
   return res.data
 }
 
-export default { getAll, getUser }
+const UserService = { getAll, getUser }
+export default UserService
