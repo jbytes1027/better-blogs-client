@@ -5,6 +5,7 @@
   "scripts": {
     "start": "serve -s build",
     "dev": "react-scripts start",
+    "prebuild": "echo REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
