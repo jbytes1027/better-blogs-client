@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "serve -s build",
+    "start": "node server.js",
     "dev": "react-scripts start",
     "prebuild": "echo REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL",
     "build": "react-scripts build",
@@ -13,11 +13,20 @@
     "lint:fix": "npx prettier --ignore-path=.gitignore --loglevel=warn --write . && npx eslint --ignore-path=.gitignore . --fix && echo 'Fix Complete.'"
   },
   "dependencies": {
-    "serve": "^14.0.1"
+    "express": "^4.18.1"
   },
   "devDependencies": {
-    "@reduxjs/toolkit": "^1.8.3",
+    "@babel/eslint-parser": "^7.18.2",
+    "@babel/preset-react": "^7.18.6",
+    "@reduxjs/toolkit": "^1.8.4",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^14.2.0",
     "axios": "^0.27.2",
+    "eslint": "^8.19.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^2.7.1",
     "prop-types": "^15.8.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
@@ -26,16 +35,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "uuid": "^8.3.2",
-    "web-vitals": "^2.1.4",
-    "@babel/eslint-parser": "^7.18.2",
-    "@babel/preset-react": "^7.18.6",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^14.2.0",
-    "eslint": "^8.19.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "prettier": "^2.7.1"
+    "web-vitals": "^2.1.4"
   },
   "browserslist": {
     "production": [
