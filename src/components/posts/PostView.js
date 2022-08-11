@@ -49,7 +49,7 @@ const PostView = () => {
         <b>Likes:</b> {post.likes}
       </div>
       <button onClick={onLike}>Like</button>
-      {loggedInUser.id === post.user.id && (
+      {loggedInUser?.id === post.user.id && (
         <>
           <br />
           <button onClick={onDelete}>Delete</button>

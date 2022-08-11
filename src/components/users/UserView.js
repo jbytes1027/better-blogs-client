@@ -13,7 +13,9 @@ const UserView = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    UserService.getUser(params.userId).then((user) => setUser(user))
+    if (params.userId)
+      UserService.getUser(params.userId).then((user) => setUser(user))
+    else setUser(null)
   }, [params.userId])
 
   if (!user) return null
