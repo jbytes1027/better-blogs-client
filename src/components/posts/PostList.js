@@ -2,13 +2,13 @@ import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { List, ListItem } from "../List"
 
-const PostList = ({ filter }) => {
+const PostList = ({ filter: postsFilter }) => {
   const posts = useSelector((state) => state.posts)
   const navigate = useNavigate()
 
-  if (!filter) filter = () => true
+  if (!postsFilter) postsFilter = () => true
 
-  const filteredPosts = posts.slice().filter(filter)
+  const filteredPosts = posts.slice().filter(postsFilter)
   if (!filteredPosts || filteredPosts.length === 0) {
     return <h2>No Posts Found</h2>
   }
