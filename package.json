@@ -3,17 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node server.js",
+    "start": "serve -s build",
     "dev": "react-scripts start",
-    "prebuild": "echo REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "npx prettier --ignore-path=.gitignore --loglevel=warn --check . && npx eslint --ignore-path=.gitignore . && echo 'Check Complete.'",
     "lint:fix": "npx prettier --ignore-path=.gitignore --loglevel=warn --write . && npx eslint --ignore-path=.gitignore . --fix && echo 'Fix Complete.'"
-  },
-  "dependencies": {
-    "express": "^4.18.1"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.18.2",
@@ -48,5 +44,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "dependencies": {
+    "serve": "^14.0.1"
   }
 }
