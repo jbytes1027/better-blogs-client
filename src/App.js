@@ -28,7 +28,7 @@ const App = () => {
 
   return (
     <>
-      <NavBar loggedInUser={user} />
+      <NavBar />
       <div className="content">
         <Routes>
           <Route path="/" element={<Navigate to="/posts/all" />} />
