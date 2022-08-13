@@ -24,9 +24,13 @@ const RegisterForm = () => {
       return true
     } catch (error) {
       if (error.name === "AxiosError") {
-        dispatch(notify(error.message))
+        if (error.request?.response) {
+          dispatch(notify(JSON.parse(error.request?.response).error))
+        } else {
+          dispatch(notify(error.message))
+        }
       } else {
-        dispatch(notify("Error registering in", notifyType.Error))
+        dispatch(notify("Error registering", notifyType.Error))
       }
       return false
     }
