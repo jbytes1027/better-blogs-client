@@ -24,8 +24,11 @@ const tryLoginFromSaved = () => async (dispatch) => {
   )
 
   // verify stored user exists
-  const res = await UserService.getUser(storedUser?.id)
-  if (!res) storedUser = null
+  try {
+    await UserService.getUser(storedUser?.id)
+  } catch {
+    storedUser = null
+  }
 
   dispatch(setUser(storedUser))
 }
