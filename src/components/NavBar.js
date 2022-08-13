@@ -1,11 +1,12 @@
+import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 
-const NavBar = ({ loggedInUser }) => {
+const NavBar = () => {
+  const user = useSelector((state) => state.user)
+
   let userElement = <Link to="/users/login">Login</Link>
-  if (loggedInUser?.username) {
-    userElement = (
-      <Link to={`/users/${loggedInUser.id}`}>{loggedInUser.username}</Link>
-    )
+  if (user?.username) {
+    userElement = <Link to={`/users/${user.id}`}>{user.username}</Link>
   }
 
   return (
