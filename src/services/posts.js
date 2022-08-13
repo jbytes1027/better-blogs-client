@@ -50,11 +50,7 @@ const like = async (post) => {
   const likedPost = {
     likes: post.likes + 1,
   }
-  const res = await axios.put(
-    `${baseUrl}/${post.id}`,
-    likedPost,
-    getAuthHeaderConfig()
-  )
+  const res = await axios.put(`${baseUrl}/${post.id}`, likedPost)
   return res.data
 }
 
