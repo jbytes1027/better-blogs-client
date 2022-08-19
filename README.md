@@ -2,7 +2,7 @@
 
 The frontend for Better Blogs, a reddit-like sharing platform for blog posts. Built to learn modern fullstack development.
 
-## Projects Used
+## Tech Stack
 
 - [React](https://github.com/facebook/react) for the User Interface
   - [Create React App](https://github.com/facebook/create-react-app) for project structure
