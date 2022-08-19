@@ -1,6 +1,6 @@
 # Better Blogs Client
 
-The frontend for Better Blogs, a reddit-like blog sharing platform. Built to learn modern fullstack development.
+The frontend for Better Blogs, a reddit-like sharing platform for articles. Built to learn modern fullstack development.
 
 ## Projects Used
 
